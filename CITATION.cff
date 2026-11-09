@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this code or these records, please cite the manuscript and this repository."
+title: "Benchmark Resolution: What a Few-Scene Benchmark Can and Cannot Decide — code, records, and generators"
+authors:
+  - family-names: Woo
+    given-names: Jihwan
+    affiliation: Amazon Web Services, Seoul, Republic of Korea
+repository-code: "https://github.com/jihwanw/benchmark-resolution"
+license: MIT
+date-released: 2026-11-09

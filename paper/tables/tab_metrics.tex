@@ -1,0 +1,12 @@
+\begin{table*}[!t]\centering\caption{Scores used in the paper: definition, colour handling, and scene-level aggregation. $x_f,\hat x_f$: ground-truth and predicted reflectance of frame $f$ ($256\times256$); ``gray'' is the channel mean; gains $\alpha$ are least-squares optimal (Sec.~\ref{sec:gauge}). Flow scores are computed at full resolution over valid pixels.}\label{tab:metrics}
+\footnotesize\resizebox{\textwidth}{!}{\begin{tabular}{llp{5.2cm}p{4.6cm}}\toprule
+Score & Colour & Definition (per frame or pair) & Scene-level score \\\midrule
+MSE, PSNR & RGB & $\mathrm{MSE}_f=\|x_f-\hat x_f\|^2/N$; no gain (absolute gauge) & PSNR of the scene-mean MSE, Eq.~\eqref{eq:psnr} (the earlier grid's convention) \\
+si-MSE & gray & scalar gain per frame, Eq.~\eqref{eq:simse} \citep{grosse2009ground}; invariant to a global scale of $\hat x_f$ & mean over frames \\
+LMSE & gray & per-window gain, windows of side $\mathrm{round}(0.1\min(h,w))=26$ at stride 13, Eq.~\eqref{eq:lmse} \citep{chen2013simple}; invariant to a scale per window & mean over frames \\
+DSSIM & gray & $(1-\mathrm{SSIM})/2$ on the unaligned prediction, Gaussian window $11\times11$, $\sigma=1.5$, $k_1=0.01$, $k_2=0.03$ \citep{wang2004ssim}; no gain: the structure term of SSIM is scale invariant, the luminance and contrast terms are not & mean over frames \\
+PSNR, scene gain & RGB & one scalar gain pooled over the scene, Eq.~\eqref{eq:poolgain}; used for the gauge hypothesis & $-10\log_{10}\mathrm{MSE}^{(\alpha)}_u$ \\\addlinespace
+EPE & -- & mean end-point error over valid pixels & mean over the scene's pairs (pair-weighted) or over its valid pixels (pixel-weighted) \\
+Fl-all, $>$3\,px rate & -- & fraction of valid pixels with EPE $>3$\,px and $>5\%$ of the flow magnitude (Fl-all) or with EPE $>3$\,px & mean over pairs \\
+EPE occ.\ / non-occ.\ & -- & EPE restricted to occluded / non-occluded valid pixels & mean over pairs \\
+\bottomrule\end{tabular}}\end{table*}

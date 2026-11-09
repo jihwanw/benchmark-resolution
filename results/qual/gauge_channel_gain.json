@@ -1,0 +1,113 @@
+{
+ "scene": "bamboo_2",
+ "frames": [
+  "f10",
+  "f30"
+ ],
+ "per_composition": [
+  {
+   "rep": 0,
+   "bamboo_1_in_train": true,
+   "psnr_raw": 20.801419692575163,
+   "psnr_scalar_gain": 22.05695259872167,
+   "psnr_channel_gain": 22.08601605806917,
+   "gain_scalar": 0.8592736525296355,
+   "gain_rgb": [
+    0.8586998976898051,
+    0.8763378070038406,
+    0.8260920933402173
+   ],
+   "scene_psnr_full_eval": 20.658918538991976,
+   "scene_gain_psnr_full_eval": 21.951498075289297
+  },
+  {
+   "rep": 1,
+   "bamboo_1_in_train": true,
+   "psnr_raw": 21.258363985755086,
+   "psnr_scalar_gain": 22.14159228644165,
+   "psnr_channel_gain": 22.151317711856166,
+   "gain_scalar": 0.8826701423171188,
+   "gain_rgb": [
+    0.8680375462013106,
+    0.8944647024012006,
+    0.8779787823956194
+   ],
+   "scene_psnr_full_eval": 21.065368197683327,
+   "scene_gain_psnr_full_eval": 22.003496512179304
+  },
+  {
+   "rep": 2,
+   "bamboo_1_in_train": true,
+   "psnr_raw": 21.32880913271384,
+   "psnr_scalar_gain": 22.23632761667237,
+   "psnr_channel_gain": 22.260312095035005,
+   "gain_scalar": 0.882332101794647,
+   "gain_rgb": [
+    0.8760852801692484,
+    0.8999671961323142,
+    0.8550490130375145
+   ],
+   "scene_psnr_full_eval": 21.11300742852719,
+   "scene_gain_psnr_full_eval": 22.071337741763195
+  },
+  {
+   "rep": 3,
+   "bamboo_1_in_train": false,
+   "psnr_raw": 12.75630395476847,
+   "psnr_scalar_gain": 20.432439625325554,
+   "psnr_channel_gain": 21.37454758217977,
+   "gain_scalar": 0.5663929134889847,
+   "gain_rgb": [
+    0.4786940441053006,
+    0.6779413223062463,
+    0.5573022299620947
+   ],
+   "scene_psnr_full_eval": 12.817812650911396,
+   "scene_gain_psnr_full_eval": 20.35640744876721
+  },
+  {
+   "rep": 4,
+   "bamboo_1_in_train": false,
+   "psnr_raw": 14.993089230641436,
+   "psnr_scalar_gain": 19.97274399476727,
+   "psnr_channel_gain": 20.720143851799953,
+   "gain_scalar": 0.6491749364448409,
+   "gain_rgb": [
+    0.5615004088838031,
+    0.7780722825176327,
+    0.6175465769138555
+   ],
+   "scene_psnr_full_eval": 15.015500129315333,
+   "scene_gain_psnr_full_eval": 19.954196359564918
+  }
+ ],
+ "summary": {
+  "in_raw": [
+   20.801419692575163,
+   21.32880913271384
+  ],
+  "out_raw": [
+   12.75630395476847,
+   14.993089230641436
+  ],
+  "in_scalar": [
+   22.05695259872167,
+   22.23632761667237
+  ],
+  "out_scalar": [
+   19.97274399476727,
+   20.432439625325554
+  ],
+  "in_channel": [
+   22.08601605806917,
+   22.260312095035005
+  ],
+  "out_channel": [
+   20.720143851799953,
+   21.37454758217977
+  ],
+  "gap_raw_means": 7.254834344309742,
+  "gap_scalar_means": 1.942365690565481,
+  "gap_channel_means": 1.118536237996917
+ }
+}

@@ -1,0 +1,300 @@
+{
+ "version": "v2",
+ "n_scenes": 23,
+ "scenes": [
+  "alley_1",
+  "alley_2",
+  "ambush_2",
+  "ambush_4",
+  "ambush_5",
+  "ambush_6",
+  "ambush_7",
+  "bamboo_1",
+  "bamboo_2",
+  "bandage_1",
+  "bandage_2",
+  "cave_2",
+  "cave_4",
+  "market_2",
+  "market_5",
+  "market_6",
+  "mountain_1",
+  "shaman_2",
+  "shaman_3",
+  "sleeping_1",
+  "sleeping_2",
+  "temple_2",
+  "temple_3"
+ ],
+ "strata_source": "simse_R_gray_mean (DirectCNN, mean over 5 reps x 2 seeds, killing v1)",
+ "random": {
+  "rep0": {
+   "fold_seed": 201,
+   "folds": [
+    [
+     "ambush_6",
+     "ambush_7",
+     "bamboo_1",
+     "cave_2",
+     "shaman_3"
+    ],
+    [
+     "ambush_2",
+     "market_2",
+     "market_6",
+     "shaman_2",
+     "sleeping_1"
+    ],
+    [
+     "bamboo_2",
+     "bandage_2",
+     "cave_4",
+     "market_5",
+     "mountain_1"
+    ],
+    [
+     "ambush_4",
+     "ambush_5",
+     "sleeping_2",
+     "temple_2"
+    ],
+    [
+     "alley_1",
+     "alley_2",
+     "bandage_1",
+     "temple_3"
+    ]
+   ]
+  },
+  "rep1": {
+   "fold_seed": 202,
+   "folds": [
+    [
+     "ambush_2",
+     "market_2",
+     "mountain_1",
+     "shaman_2",
+     "sleeping_2"
+    ],
+    [
+     "ambush_6",
+     "bandage_2",
+     "cave_2",
+     "market_5",
+     "market_6"
+    ],
+    [
+     "alley_1",
+     "ambush_4",
+     "ambush_5",
+     "temple_2",
+     "temple_3"
+    ],
+    [
+     "alley_2",
+     "ambush_7",
+     "bamboo_1",
+     "shaman_3"
+    ],
+    [
+     "bamboo_2",
+     "bandage_1",
+     "cave_4",
+     "sleeping_1"
+    ]
+   ]
+  },
+  "rep2": {
+   "fold_seed": 203,
+   "folds": [
+    [
+     "alley_2",
+     "ambush_4",
+     "market_6",
+     "mountain_1",
+     "sleeping_1"
+    ],
+    [
+     "ambush_7",
+     "bamboo_1",
+     "cave_2",
+     "market_5",
+     "temple_3"
+    ],
+    [
+     "alley_1",
+     "ambush_5",
+     "bandage_2",
+     "sleeping_2",
+     "temple_2"
+    ],
+    [
+     "ambush_2",
+     "bandage_1",
+     "market_2",
+     "shaman_2"
+    ],
+    [
+     "ambush_6",
+     "bamboo_2",
+     "cave_4",
+     "shaman_3"
+    ]
+   ]
+  },
+  "rep3": {
+   "fold_seed": 204,
+   "folds": [
+    [
+     "ambush_4",
+     "bandage_1",
+     "bandage_2",
+     "shaman_2",
+     "sleeping_2"
+    ],
+    [
+     "alley_1",
+     "ambush_5",
+     "market_5",
+     "market_6",
+     "sleeping_1"
+    ],
+    [
+     "ambush_7",
+     "bamboo_1",
+     "bamboo_2",
+     "cave_2",
+     "mountain_1"
+    ],
+    [
+     "ambush_2",
+     "cave_4",
+     "shaman_3",
+     "temple_3"
+    ],
+    [
+     "alley_2",
+     "ambush_6",
+     "market_2",
+     "temple_2"
+    ]
+   ]
+  },
+  "rep4": {
+   "fold_seed": 205,
+   "folds": [
+    [
+     "ambush_7",
+     "bandage_2",
+     "cave_2",
+     "market_6",
+     "temple_3"
+    ],
+    [
+     "ambush_6",
+     "bamboo_1",
+     "bamboo_2",
+     "bandage_1",
+     "temple_2"
+    ],
+    [
+     "alley_2",
+     "cave_4",
+     "shaman_2",
+     "shaman_3",
+     "sleeping_1"
+    ],
+    [
+     "alley_1",
+     "ambush_4",
+     "market_2",
+     "sleeping_2"
+    ],
+    [
+     "ambush_2",
+     "ambush_5",
+     "market_5",
+     "mountain_1"
+    ]
+   ]
+  }
+ },
+ "stratified": {
+  "rep0": {
+   "fold_seed": 301,
+   "folds": [
+    [
+     "bamboo_2",
+     "cave_4",
+     "market_2",
+     "mountain_1",
+     "temple_3"
+    ],
+    [
+     "alley_1",
+     "alley_2",
+     "ambush_2",
+     "ambush_4",
+     "temple_2"
+    ],
+    [
+     "ambush_5",
+     "bandage_1",
+     "market_6",
+     "shaman_3",
+     "sleeping_1"
+    ],
+    [
+     "ambush_7",
+     "bandage_2",
+     "market_5",
+     "shaman_2"
+    ],
+    [
+     "ambush_6",
+     "bamboo_1",
+     "cave_2",
+     "sleeping_2"
+    ]
+   ]
+  },
+  "rep1": {
+   "fold_seed": 302,
+   "folds": [
+    [
+     "bandage_1",
+     "cave_4",
+     "market_6",
+     "shaman_3",
+     "temple_3"
+    ],
+    [
+     "ambush_2",
+     "ambush_6",
+     "ambush_7",
+     "market_2",
+     "sleeping_1"
+    ],
+    [
+     "bamboo_1",
+     "bamboo_2",
+     "mountain_1",
+     "sleeping_2",
+     "temple_2"
+    ],
+    [
+     "alley_1",
+     "alley_2",
+     "ambush_5",
+     "bandage_2"
+    ],
+    [
+     "ambush_4",
+     "cave_2",
+     "market_5",
+     "shaman_2"
+    ]
+   ]
+  }
+ }
+}

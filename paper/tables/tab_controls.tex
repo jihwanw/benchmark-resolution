@@ -1,0 +1,27 @@
+\begin{table}[!t]\centering\caption{Controls. Top: same-configuration reruns (v1 vs.\ v2; identical seed, training code, container image, and GPU type; metric functions identical up to formatting) at the scene level, per architecture: the mean rerun shift, and the implied single-run reproducibility variance, Eq.~\eqref{eq:nondet}, pooled over that architecture's rerun pairs and scenes, as a fraction of its seed component, with a 95\% interval from a bootstrap over that architecture's 50 rerun pairs (100 in total; scene rows within a run are not independent). Middle: scene-level seed variance by architecture (PSNR). Bottom: stratified versus random five-fold assignments of matched fold sizes (5, 5, 5, 4, 4), both reporting unweighted fold means: the simulated fold-mean variance reduction from each model's own per-scene table and the observed reduction in the realised runs (two stratified repeats built on DirectCNN si-MSE strata against five random repeats).}\label{tab:controls}
+\footnotesize\setlength{\tabcolsep}{4pt}\begin{tabular}{lrrr}\toprule
+\multicolumn{4}{l}{\textit{Single-run reproducibility component} (460 scene rows, 100 rerun pairs)}\\
+Metric & mean shift D / U & ratio DirectCNN [95\%] & ratio UNet [95\%] \\\midrule
+PSNR & +0.024 / $+6.1\times10^{-3}$ & 0.43 [0.19, 0.75] & 0.73 [0.51, 0.98] \\
+si-MSE & $-7.3\times10^{-5}$ / $-1.2\times10^{-4}$ & 0.51 [0.33, 0.75] & 0.89 [0.61, 1.22] \\
+LMSE & $-6.2\times10^{-5}$ / $+7.5\times10^{-5}$ & 0.38 [0.24, 0.54] & 1.05 [0.70, 1.45] \\
+DSSIM & $-4.9\times10^{-4}$ / $+3.0\times10^{-4}$ & 0.57 [0.31, 0.92] & 0.79 [0.48, 1.29] \\
+\midrule
+\multicolumn{4}{l}{\textit{Seed variance by architecture (PSNR)}}\\
+Model & scene-level & run-level & $\sigma^2_{\mathrm{scene}}$ \\\midrule
+DirectCNN & 0.308 & 0.095 & 2.77 \\
+Proposed & 0.443 & 0.118 & 1.44 \\
+TransUNet & 0.819 & 0.247 & 1.37 \\
+UNet & 0.283 & 0.0798 & 1.27 \\
+\midrule
+\multicolumn{4}{l}{\textit{Stratified vs.\ random partitions: variance reduction}}\\
+Model / metric & simulated & observed & reps (rand/strat) \\\midrule
+DirectCNN / si-MSE & +0.66 & +0.39 & 5/2 \\
+DirectCNN / LMSE & +0.45 & -0.11 & 5/2 \\
+DirectCNN / DSSIM & -0.06 & +0.05 & 5/2 \\
+DirectCNN / PSNR & +0.56 & +0.34 & 5/2 \\
+UNet / si-MSE & +0.50 & -1.43 & 5/2 \\
+UNet / LMSE & +0.38 & -1.15 & 5/2 \\
+UNet / DSSIM & -0.05 & -0.15 & 5/2 \\
+UNet / PSNR & +0.26 & -0.87 & 5/2 \\
+\bottomrule\end{tabular}\end{table}

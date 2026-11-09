@@ -1,0 +1,4 @@
+qual-intrinsic 
+qual-flow 
+qual-intrinsic i-0d5144e24418a3d6b g4dn.xlarge us-west-2 us-west-2a
+qual-flow i-0200892564afccf0a g4dn.xlarge us-west-2 us-west-2a

@@ -1,0 +1,16 @@
+\begin{table*}[!t]\centering\caption{What a design costs and what it resolves. Minimum detectable effect (two-sided $\alpha=0.05$, power 0.8) of a difference between two independently evaluated absolute scores (the listed runs apply to each arm; Eq.~\eqref{eq:seabs}) and of the two headline paired comparisons, under ten designs (the eight of the ladder and the two that the search of Sec.~\ref{sec:results3} finds for the intrinsic comparison), ordered by cost, with the number of training runs each requires per method, computed from the estimated components with Eqs.~\eqref{eq:seabs}, \eqref{eq:mdepaired} and \eqref{eq:fullcov}. Paired columns give the MDE and, in parentheses, the actual gap divided by it (a value $\ge 1$: the design has power $\ge0.8$ for a true gap of the observed size). The runs column is the cost of evaluating one method once the components are known; the components themselves were estimated from the 75-run design of the last row (Sec.~\ref{sec:results3}).}\label{tab:designcost}
+\footnotesize\setlength{\tabcolsep}{4pt}\resizebox{\textwidth}{!}{\begin{tabular}{@{}lrrrrrr@{}}\toprule
+ & & \multicolumn{3}{c}{MDE of an absolute score} & \multicolumn{2}{c}{paired MDE (gap/MDE)} \\
+\cmidrule(lr){3-5}\cmidrule(lr){6-7}
+Design & runs & \shortstack[r]{si-MSE\\DirectCNN} & \shortstack[r]{PSNR (dB)\\DirectCNN} & \shortstack[r]{EPE (px)\\RAFT-small} & \shortstack[r]{si-MSE\\UNet$-$DirectCNN} & \shortstack[r]{EPE (px)\\RAFT-s$-$RAFT-l} \\\midrule
+1 partition, 1 seed & 1 & 0.0179 & 4.2 & 5.12 & 0.00722 (0.12) & 1.83 (0.59) \\
+1 partition, 3 seeds (prevailing) & 3 & 0.0178 & 4.08 & 5.1 & 0.0067 (0.13) & 1.79 (0.60) \\
+full coverage, 1 seed & 5 & 0.00255 & 1.5 & 0.39 & 0.00199 (0.43) & 0.268 (4.00) \\
+full coverage, 2 seeds & 10 & 0.00239 & 1.45 & 0.337 & 0.00167 (0.51) & 0.218 (4.92) \\
+full coverage, 3 seeds & 15 & 0.00234 & 1.43 & 0.317 & 0.00154 (0.55) & 0.199 (5.40) \\
+5 random partitions, 3 seeds & 15 & 0.00797 & 1.83 & 2.28 & 0.003 (0.28) & 0.801 (1.34) \\
+full coverage $\times$2, 3 seeds & 30 & 0.00166 & 1.01 & 0.224 & 0.00109 (0.78) & 0.14 (7.64) \\
+full coverage $\times$6, 1 seed: cheapest with ratio $\ge1$ (search) & 30 & 0.00104 & 0.613 & 0.159 & 0.000814 (1.04) & 0.11 (9.79) \\
+full coverage $\times$9, 1 seed: cheapest with ratio $\ge1.25$ (search) & 45 & 0.000849 & 0.501 & 0.13 & 0.000664 (1.28) & 0.0895 (11.99) \\
+full coverage $\times$5, 3 seeds (this study) & 75 & 0.00105 & 0.641 & 0.142 & 0.000691 (1.23) & 0.0888 (12.08) \\
+\bottomrule\end{tabular}}\end{table*}

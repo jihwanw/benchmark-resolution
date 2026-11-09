@@ -1,0 +1,7 @@
+\begin{table*}[!t]\centering\caption{The experimental programme. All runs use MPI Sintel (23 scenes); folds are shared across experiments (fold-assignment seeds 201--205). GPU hours on a single NVIDIA T4 per run; see Sec.~\ref{sec:programme} for recipes.}\label{tab:design}
+\small\resizebox{\textwidth}{!}{\begin{tabular}{p{2.3cm}p{1.5cm}p{3.6cm}p{4.6cm}p{2.2cm}p{1.6cm}r}\toprule
+Experiment & Task & Models & Design & Seeds & Runs & GPU-h \\\midrule
+Killing experiment & intrinsic & DirectCNN, UNet & 5 random repeats $\times$ 5 folds & 2 (42, 43) & 100 + 2 parity & 32.3 \\
+Main experiment & intrinsic & DirectCNN, UNet, TransUNet, Proposed & 5 random repeats $\times$ 5 folds; 2 stratified repeats (DirectCNN, UNet) & 3 (42--44); 2 for stratified & 340 & 136.6 \\
+Flow arm & optical flow & RAFT-small, RAFT-large (C+T init.) & 5 random repeats $\times$ 5 folds (same folds) & 3 (42--44) & 150 + 2 zero-shot & 75.8 \\
+\bottomrule\end{tabular}}\end{table*}

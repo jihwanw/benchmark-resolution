@@ -1,0 +1,38 @@
+{
+ "rep": 0,
+ "fold": 3,
+ "test_scenes": [
+  "ambush_4",
+  "ambush_5",
+  "sleeping_2",
+  "temple_2"
+ ],
+ "scenes_shown": [
+  "ambush_4",
+  "sleeping_2"
+ ],
+ "pairs_shown": [
+  "ambush_4/frame_0011.png",
+  "ambush_4/frame_0031.png",
+  "sleeping_2/frame_0011.png",
+  "sleeping_2/frame_0031.png"
+ ],
+ "seed": 42,
+ "iters": 3000,
+ "models": {
+  "raft_small": {
+   "minutes": 13.181733099619548,
+   "scene_epe_finetuned": {
+    "ambush_4": 15.414022445678711,
+    "sleeping_2": 0.1664004772901535
+   }
+  },
+  "raft_large": {
+   "minutes": 45.47776377995809,
+   "scene_epe_finetuned": {
+    "ambush_4": 6.0083441734313965,
+    "sleeping_2": 0.10193774849176407
+   }
+  }
+ }
+}

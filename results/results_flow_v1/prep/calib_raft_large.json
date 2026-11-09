@@ -1,0 +1,9 @@
+{
+ "arch": "raft_large",
+ "calib_iters": 60,
+ "train_min_per_iter": 0.015865314337942336,
+ "eval_min_per_pair": 0.007135685880978902,
+ "estimated_run_minutes_at_budget": 49.16579390764236,
+ "epe_pair_mean_after_calib": 0.1859130023047328,
+ "peak_mem_GB": 4.964385792
+}

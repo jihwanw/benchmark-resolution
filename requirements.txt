@@ -1,0 +1,8 @@
+numpy
+scipy
+pandas
+statsmodels
+matplotlib
+pillow
+torch>=2.1
+torchvision

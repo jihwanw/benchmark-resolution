@@ -1,0 +1,176 @@
+{
+ "version": "v2",
+ "metric": "simse_R_gray_mean (DirectCNN, mean over 5 reps x 2 seeds, killing v1)",
+ "n_source_runs": 50,
+ "source_run_set_sha256_16": "af582218d0ec4ba0",
+ "strata_sizes_hard_to_easy": [
+  8,
+  8,
+  7
+ ],
+ "table": [
+  {
+   "scene": "cave_4",
+   "simse_R_gray": 0.050592192679643634,
+   "n_runs": 10,
+   "stratum": 0
+  },
+  {
+   "scene": "temple_2",
+   "simse_R_gray": 0.03879884069040417,
+   "n_runs": 10,
+   "stratum": 0
+  },
+  {
+   "scene": "ambush_7",
+   "simse_R_gray": 0.035901347145438196,
+   "n_runs": 10,
+   "stratum": 0
+  },
+  {
+   "scene": "mountain_1",
+   "simse_R_gray": 0.031030014146119354,
+   "n_runs": 10,
+   "stratum": 0
+  },
+  {
+   "scene": "ambush_5",
+   "simse_R_gray": 0.030627678599208598,
+   "n_runs": 10,
+   "stratum": 0
+  },
+  {
+   "scene": "ambush_6",
+   "simse_R_gray": 0.02337700789794326,
+   "n_runs": 10,
+   "stratum": 0
+  },
+  {
+   "scene": "ambush_4",
+   "simse_R_gray": 0.02333885274658149,
+   "n_runs": 10,
+   "stratum": 0
+  },
+  {
+   "scene": "market_6",
+   "simse_R_gray": 0.022816459517925977,
+   "n_runs": 10,
+   "stratum": 0
+  },
+  {
+   "scene": "temple_3",
+   "simse_R_gray": 0.02133717318065464,
+   "n_runs": 10,
+   "stratum": 1
+  },
+  {
+   "scene": "bandage_2",
+   "simse_R_gray": 0.019694636030122635,
+   "n_runs": 10,
+   "stratum": 1
+  },
+  {
+   "scene": "market_2",
+   "simse_R_gray": 0.01736703278310597,
+   "n_runs": 10,
+   "stratum": 1
+  },
+  {
+   "scene": "cave_2",
+   "simse_R_gray": 0.017323007870465517,
+   "n_runs": 10,
+   "stratum": 1
+  },
+  {
+   "scene": "alley_1",
+   "simse_R_gray": 0.01696472653001547,
+   "n_runs": 10,
+   "stratum": 1
+  },
+  {
+   "scene": "shaman_3",
+   "simse_R_gray": 0.015776634601876137,
+   "n_runs": 10,
+   "stratum": 1
+  },
+  {
+   "scene": "shaman_2",
+   "simse_R_gray": 0.01497180980630219,
+   "n_runs": 10,
+   "stratum": 1
+  },
+  {
+   "scene": "sleeping_2",
+   "simse_R_gray": 0.014858941761776805,
+   "n_runs": 10,
+   "stratum": 1
+  },
+  {
+   "scene": "bandage_1",
+   "simse_R_gray": 0.013855174612253903,
+   "n_runs": 10,
+   "stratum": 2
+  },
+  {
+   "scene": "market_5",
+   "simse_R_gray": 0.012429104939103128,
+   "n_runs": 10,
+   "stratum": 2
+  },
+  {
+   "scene": "sleeping_1",
+   "simse_R_gray": 0.011799452055245638,
+   "n_runs": 10,
+   "stratum": 2
+  },
+  {
+   "scene": "ambush_2",
+   "simse_R_gray": 0.010976670753388179,
+   "n_runs": 10,
+   "stratum": 2
+  },
+  {
+   "scene": "alley_2",
+   "simse_R_gray": 0.009820502545684576,
+   "n_runs": 10,
+   "stratum": 2
+  },
+  {
+   "scene": "bamboo_2",
+   "simse_R_gray": 0.005949917739257217,
+   "n_runs": 10,
+   "stratum": 2
+  },
+  {
+   "scene": "bamboo_1",
+   "simse_R_gray": 0.005376689061522484,
+   "n_runs": 10,
+   "stratum": 2
+  }
+ ],
+ "stratum_of": {
+  "cave_4": 0,
+  "temple_2": 0,
+  "ambush_7": 0,
+  "mountain_1": 0,
+  "ambush_5": 0,
+  "ambush_6": 0,
+  "ambush_4": 0,
+  "market_6": 0,
+  "temple_3": 1,
+  "bandage_2": 1,
+  "market_2": 1,
+  "cave_2": 1,
+  "alley_1": 1,
+  "shaman_3": 1,
+  "shaman_2": 1,
+  "sleeping_2": 1,
+  "bandage_1": 2,
+  "market_5": 2,
+  "sleeping_1": 2,
+  "ambush_2": 2,
+  "alley_2": 2,
+  "bamboo_2": 2,
+  "bamboo_1": 2
+ }
+}

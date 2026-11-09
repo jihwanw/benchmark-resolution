@@ -1,0 +1,552 @@
+{
+ "n_sim": 300,
+ "seed": 21,
+ "fullcov": [
+  {
+   "experiment": "intrinsic",
+   "arch": "direct",
+   "metric": "simse_R_gray_mean",
+   "observed_ratio": 0.5902571218461564,
+   "empirical_ci95": [
+    0.16383985076876303,
+    2.1659127347718825
+   ],
+   "empirical_p_two_sided": 0.5866666666666667,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.871824158243411
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "direct",
+   "metric": "lmse_R_chen_mean",
+   "observed_ratio": 0.6672281414835529,
+   "empirical_ci95": [
+    0.12113369314584951,
+    2.3082480993772427
+   ],
+   "empirical_p_two_sided": 0.7266666666666667,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.872715353406256
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "direct",
+   "metric": "dssim_R_mean",
+   "observed_ratio": 1.3078968831929525,
+   "empirical_ci95": [
+    0.139816739484959,
+    2.302319745048772
+   ],
+   "empirical_p_two_sided": 0.4533333333333333,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8405698640907628
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "direct",
+   "metric": "R_PSNR_of_mean_mse",
+   "observed_ratio": 1.026780649669912,
+   "empirical_ci95": [
+    0.16347867587149148,
+    2.33601341137411
+   ],
+   "empirical_p_two_sided": 0.8866666666666667,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9452868234076546
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "direct",
+   "metric": "R_siPSNR_scenegain_rgb",
+   "observed_ratio": 0.6940932366123077,
+   "empirical_ci95": [
+    0.13615714544315832,
+    2.4135499875647484
+   ],
+   "empirical_p_two_sided": 0.7933333333333333,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8631280871329978
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "proposed",
+   "metric": "simse_R_gray_mean",
+   "observed_ratio": 0.46680665910257557,
+   "empirical_ci95": [
+    0.11409271393997035,
+    2.275503713146055
+   ],
+   "empirical_p_two_sided": 0.5,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.7599657214341349
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "proposed",
+   "metric": "lmse_R_chen_mean",
+   "observed_ratio": 0.5857866111271105,
+   "empirical_ci95": [
+    0.15972401522209337,
+    2.34360793180318
+   ],
+   "empirical_p_two_sided": 0.5333333333333333,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9199408890408391
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "proposed",
+   "metric": "dssim_R_mean",
+   "observed_ratio": 0.6710777067723892,
+   "empirical_ci95": [
+    0.1513457484600434,
+    2.5076801103818496
+   ],
+   "empirical_p_two_sided": 0.6466666666666666,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9486335228141003
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "proposed",
+   "metric": "R_PSNR_of_mean_mse",
+   "observed_ratio": 1.2454646761988026,
+   "empirical_ci95": [
+    0.09956083127819373,
+    2.3380253005073923
+   ],
+   "empirical_p_two_sided": 0.49333333333333335,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.7824259046140525
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "proposed",
+   "metric": "R_siPSNR_scenegain_rgb",
+   "observed_ratio": 0.29235155141462843,
+   "empirical_ci95": [
+    0.17594844822576017,
+    2.2490022449659772
+   ],
+   "empirical_p_two_sided": 0.2,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9263112046229227
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "transformer",
+   "metric": "simse_R_gray_mean",
+   "observed_ratio": 1.2287917461073465,
+   "empirical_ci95": [
+    0.12748739963477304,
+    2.2101489268878067
+   ],
+   "empirical_p_two_sided": 0.44,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.7957300117055672
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "transformer",
+   "metric": "lmse_R_chen_mean",
+   "observed_ratio": 0.8926416523383102,
+   "empirical_ci95": [
+    0.12321129148155062,
+    2.0164903148826108
+   ],
+   "empirical_p_two_sided": 0.82,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.7601057555841078
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "transformer",
+   "metric": "dssim_R_mean",
+   "observed_ratio": 1.1420662975247287,
+   "empirical_ci95": [
+    0.12403462466991147,
+    2.188906023508204
+   ],
+   "empirical_p_two_sided": 0.6666666666666666,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8959885214761221
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "transformer",
+   "metric": "R_PSNR_of_mean_mse",
+   "observed_ratio": 0.9687462262028261,
+   "empirical_ci95": [
+    0.1561166851458571,
+    2.344915373437959
+   ],
+   "empirical_p_two_sided": 0.8266666666666667,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8052514647596343
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "transformer",
+   "metric": "R_siPSNR_scenegain_rgb",
+   "observed_ratio": 0.9703640970167872,
+   "empirical_ci95": [
+    0.18365014994912976,
+    2.1094377670291657
+   ],
+   "empirical_p_two_sided": 0.7733333333333333,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8352581656559985
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "unet",
+   "metric": "simse_R_gray_mean",
+   "observed_ratio": 0.33677588648507806,
+   "empirical_ci95": [
+    0.1429077913380954,
+    2.1089458056812127
+   ],
+   "empirical_p_two_sided": 0.3333333333333333,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.718320094366377
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "unet",
+   "metric": "lmse_R_chen_mean",
+   "observed_ratio": 0.199491197744478,
+   "empirical_ci95": [
+    0.1485011622161741,
+    2.080547875737065
+   ],
+   "empirical_p_two_sided": 0.09333333333333334,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8394547939509865
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "unet",
+   "metric": "dssim_R_mean",
+   "observed_ratio": 1.0219842670779862,
+   "empirical_ci95": [
+    0.14209151660143488,
+    2.319547190818479
+   ],
+   "empirical_p_two_sided": 0.7866666666666666,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8299293225626047
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "unet",
+   "metric": "R_PSNR_of_mean_mse",
+   "observed_ratio": 1.2275896929684653,
+   "empirical_ci95": [
+    0.15526681013503915,
+    2.4843469600073926
+   ],
+   "empirical_p_two_sided": 0.62,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8959438762728971
+  },
+  {
+   "experiment": "intrinsic",
+   "arch": "unet",
+   "metric": "R_siPSNR_scenegain_rgb",
+   "observed_ratio": 0.6909796871697358,
+   "empirical_ci95": [
+    0.14815745942717262,
+    2.262425517226845
+   ],
+   "empirical_p_two_sided": 0.8866666666666667,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.7668064211583839
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_large",
+   "metric": "epe_mean",
+   "observed_ratio": 1.900976009721259,
+   "empirical_ci95": [
+    0.13296897044556302,
+    2.412711035237492
+   ],
+   "empirical_p_two_sided": 0.09333333333333334,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8055527434602187
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_large",
+   "metric": "epe_pixel_weighted",
+   "observed_ratio": 1.9027417645510827,
+   "empirical_ci95": [
+    0.1619159825540416,
+    2.231069312099584
+   ],
+   "empirical_p_two_sided": 0.12,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8300379623981436
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_large",
+   "metric": "fl_all_mean",
+   "observed_ratio": 1.7742324421147144,
+   "empirical_ci95": [
+    0.12248330957082394,
+    2.464311706262143
+   ],
+   "empirical_p_two_sided": 0.26666666666666666,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9063009732018747
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_large",
+   "metric": "out3_mean",
+   "observed_ratio": 1.599779974810526,
+   "empirical_ci95": [
+    0.14332990525528805,
+    2.5984563073627243
+   ],
+   "empirical_p_two_sided": 0.36666666666666664,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9951469992075266
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_large",
+   "metric": "epe_occ_mean",
+   "observed_ratio": 2.1758316376929656,
+   "empirical_ci95": [
+    0.10658717189248353,
+    2.1145143159746156
+   ],
+   "empirical_p_two_sided": 0.04666666666666667,
+   "inside_empirical_band": false,
+   "inside_nominal_band": true,
+   "sim_median": 0.735925832068294
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_large",
+   "metric": "epe_noc_mean",
+   "observed_ratio": 1.3117553110811364,
+   "empirical_ci95": [
+    0.060444580705236436,
+    2.2693225420829792
+   ],
+   "empirical_p_two_sided": 0.36666666666666664,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.7745440403764168
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_small",
+   "metric": "epe_mean",
+   "observed_ratio": 0.6990794182503774,
+   "empirical_ci95": [
+    0.13987184950247758,
+    2.1299251203371665
+   ],
+   "empirical_p_two_sided": 0.7066666666666667,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9008655529648371
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_small",
+   "metric": "epe_pixel_weighted",
+   "observed_ratio": 0.6999212266185334,
+   "empirical_ci95": [
+    0.11535837024477567,
+    2.2736660593803246
+   ],
+   "empirical_p_two_sided": 0.8533333333333334,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.7528851813621709
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_small",
+   "metric": "fl_all_mean",
+   "observed_ratio": 1.07697020728313,
+   "empirical_ci95": [
+    0.12095683985181765,
+    2.2360042609194024
+   ],
+   "empirical_p_two_sided": 0.8066666666666666,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9260430709770823
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_small",
+   "metric": "out3_mean",
+   "observed_ratio": 0.8462872247479607,
+   "empirical_ci95": [
+    0.13438352796749486,
+    2.3015070533935136
+   ],
+   "empirical_p_two_sided": 0.9333333333333333,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.8815056855216601
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_small",
+   "metric": "epe_occ_mean",
+   "observed_ratio": 0.4206720453730422,
+   "empirical_ci95": [
+    0.13535797054545595,
+    2.38101747848031
+   ],
+   "empirical_p_two_sided": 0.3,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.9517086255471596
+  },
+  {
+   "experiment": "flow",
+   "arch": "raft_small",
+   "metric": "epe_noc_mean",
+   "observed_ratio": 0.9456404471632832,
+   "empirical_ci95": [
+    0.13387461800258074,
+    2.0160307528694754
+   ],
+   "empirical_p_two_sided": 0.78,
+   "inside_empirical_band": true,
+   "inside_nominal_band": true,
+   "sim_median": 0.7760405643966009
+  }
+ ],
+ "stratification": [
+  {
+   "arch": "direct",
+   "metric": "simse_R_gray_mean",
+   "observed_ratio_strat_over_rand": 0.6106705817968959,
+   "empirical_ci95": [
+    0.4765304581936009,
+    1.3801715586889285
+   ],
+   "sim_median": 0.8639821151448099,
+   "empirical_p_two_sided": 0.29333333333333333,
+   "n_sim": 300
+  },
+  {
+   "arch": "direct",
+   "metric": "lmse_R_chen_mean",
+   "observed_ratio_strat_over_rand": 1.1109140048133515,
+   "empirical_ci95": [
+    0.6819824187436786,
+    1.711072811398097
+   ],
+   "sim_median": 1.1230752024131985,
+   "empirical_p_two_sided": 0.9333333333333333,
+   "n_sim": 300
+  },
+  {
+   "arch": "direct",
+   "metric": "dssim_R_mean",
+   "observed_ratio_strat_over_rand": 0.9546084033485535,
+   "empirical_ci95": [
+    0.48761509130821334,
+    1.4275836179656562
+   ],
+   "sim_median": 0.8483984794825965,
+   "empirical_p_two_sided": 0.6933333333333334,
+   "n_sim": 300
+  },
+  {
+   "arch": "direct",
+   "metric": "R_PSNR_of_mean_mse",
+   "observed_ratio_strat_over_rand": 0.6591398729656449,
+   "empirical_ci95": [
+    0.24453320636039047,
+    1.9807484445848331
+   ],
+   "sim_median": 0.7206297119541867,
+   "empirical_p_two_sided": 0.82,
+   "n_sim": 300
+  },
+  {
+   "arch": "unet",
+   "metric": "simse_R_gray_mean",
+   "observed_ratio_strat_over_rand": 2.425201786365476,
+   "empirical_ci95": [
+    1.4584391527139424,
+    4.17745295707647
+   ],
+   "sim_median": 2.5214455286346213,
+   "empirical_p_two_sided": 0.8866666666666667,
+   "n_sim": 300
+  },
+  {
+   "arch": "unet",
+   "metric": "lmse_R_chen_mean",
+   "observed_ratio_strat_over_rand": 2.150680986694693,
+   "empirical_ci95": [
+    1.6302769610565484,
+    4.693423733819244
+   ],
+   "sim_median": 2.752979463704074,
+   "empirical_p_two_sided": 0.37333333333333335,
+   "n_sim": 300
+  },
+  {
+   "arch": "unet",
+   "metric": "dssim_R_mean",
+   "observed_ratio_strat_over_rand": 1.1538640959941593,
+   "empirical_ci95": [
+    0.41457710569486994,
+    1.8236424346944007
+   ],
+   "sim_median": 0.9369123170599073,
+   "empirical_p_two_sided": 0.5,
+   "n_sim": 300
+  },
+  {
+   "arch": "unet",
+   "metric": "R_PSNR_of_mean_mse",
+   "observed_ratio_strat_over_rand": 1.869698975701227,
+   "empirical_ci95": [
+    0.3388174882999867,
+    3.5601803961440917
+   ],
+   "sim_median": 1.1583535197537769,
+   "empirical_p_two_sided": 0.36666666666666664,
+   "n_sim": 300
+  }
+ ]
+}

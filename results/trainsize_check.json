@@ -1,0 +1,144 @@
+{
+ "intrinsic": {
+  "direct": {
+   "R_PSNR_of_mean_mse": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": 0.5283706180173231,
+    "se": 0.3160600420601183,
+    "diff_over_between_scene_sd": 0.30128027496221327,
+    "between_scene_sd": 1.7537511145845563
+   },
+   "simse_R_gray_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -0.0006672298199224294,
+    "se": 0.0003479533421295166,
+    "diff_over_between_scene_sd": -0.060976858611374495,
+    "between_scene_sd": 0.01094234493408235
+   },
+   "lmse_R_chen_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -0.0002367481732206631,
+    "se": 0.00012684821394497593,
+    "diff_over_between_scene_sd": -0.05915405300819139,
+    "between_scene_sd": 0.004002230805518588
+   },
+   "dssim_R_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -0.0035460680360229813,
+    "se": 0.0021501998432279256,
+    "diff_over_between_scene_sd": -0.08644342613530533,
+    "between_scene_sd": 0.04102183583598952
+   }
+  },
+  "proposed": {
+   "R_PSNR_of_mean_mse": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": 0.4765296366176471,
+    "se": 0.34868275486169137,
+    "diff_over_between_scene_sd": 0.3515220445662015,
+    "between_scene_sd": 1.3556180728457932
+   },
+   "simse_R_gray_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": 0.0006316084072279755,
+    "se": 0.00039830616879966757,
+    "diff_over_between_scene_sd": 0.05922157546510941,
+    "between_scene_sd": 0.010665174005715023
+   },
+   "lmse_R_chen_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -4.090957419349067e-05,
+    "se": 0.00013519808030102486,
+    "diff_over_between_scene_sd": -0.010627018919462671,
+    "between_scene_sd": 0.003849581383408242
+   },
+   "dssim_R_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -0.004252560595115846,
+    "se": 0.002572746912853678,
+    "diff_over_between_scene_sd": -0.11006392035864322,
+    "between_scene_sd": 0.03863718992798803
+   }
+  },
+  "transformer": {
+   "R_PSNR_of_mean_mse": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": 0.38561216872539267,
+    "se": 0.32073183812141887,
+    "diff_over_between_scene_sd": 0.29161529636919536,
+    "between_scene_sd": 1.3223317621761306
+   },
+   "simse_R_gray_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": 3.6547139813188466e-05,
+    "se": 0.000549916421987646,
+    "diff_over_between_scene_sd": 0.003916336954707558,
+    "between_scene_sd": 0.009331970214988185
+   },
+   "lmse_R_chen_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -8.69634371324389e-05,
+    "se": 0.00018508077422407017,
+    "diff_over_between_scene_sd": -0.02611412404605789,
+    "between_scene_sd": 0.0033301303531782316
+   },
+   "dssim_R_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -0.002406189038837095,
+    "se": 0.0027358680564979333,
+    "diff_over_between_scene_sd": -0.06096442642809557,
+    "between_scene_sd": 0.039468739063346595
+   }
+  },
+  "unet": {
+   "R_PSNR_of_mean_mse": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": 0.4738293310159139,
+    "se": 0.35785870358098176,
+    "diff_over_between_scene_sd": 0.36496832191028966,
+    "between_scene_sd": 1.298275227109663
+   },
+   "simse_R_gray_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": 8.917214015376008e-05,
+    "se": 0.0005344758098897774,
+    "diff_over_between_scene_sd": 0.008749031330661603,
+    "between_scene_sd": 0.01019223006337284
+   },
+   "lmse_R_chen_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -2.0801212605802822e-05,
+    "se": 0.00014174770224165145,
+    "diff_over_between_scene_sd": -0.005117723275056267,
+    "between_scene_sd": 0.004064544229499029
+   },
+   "dssim_R_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -0.0032417313915611575,
+    "se": 0.0028114578071163263,
+    "diff_over_between_scene_sd": -0.0825497469765589,
+    "between_scene_sd": 0.03927003425560699
+   }
+  }
+ },
+ "flow": {
+  "raft_large": {
+   "epe_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": -0.04831330431669376,
+    "se": 0.030155445685981944,
+    "diff_over_between_scene_sd": -0.02774269815505591,
+    "between_scene_sd": 1.741478209749725
+   }
+  },
+  "raft_small": {
+   "epe_mean": {
+    "n_scenes_both": 20,
+    "mean_diff_19_minus_18": 0.0654914307484216,
+    "se": 0.06975355740869935,
+    "diff_over_between_scene_sd": 0.020291197285141845,
+    "between_scene_sd": 3.2275784335494815
+   }
+  }
+ }
+}

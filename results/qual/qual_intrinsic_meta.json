@@ -1,0 +1,216 @@
+{
+ "jobs": {
+  "thumbs": {
+   "n_scenes": 23,
+   "frame": "middle frame of each scene, final pass + albedo pass, 256x256"
+  },
+  "gauge": {
+   "scene": "bamboo_2",
+   "arch": "direct",
+   "compositions": [
+    {
+     "rep": 0,
+     "fold": 2,
+     "test_scenes": [
+      "bamboo_2",
+      "bandage_2",
+      "cave_4",
+      "market_5",
+      "mountain_1"
+     ],
+     "train_scenes": [
+      "alley_1",
+      "alley_2",
+      "ambush_2",
+      "ambush_4",
+      "ambush_5",
+      "ambush_6",
+      "ambush_7",
+      "bamboo_1",
+      "bandage_1",
+      "cave_2",
+      "market_2",
+      "market_6",
+      "shaman_2",
+      "shaman_3",
+      "sleeping_1",
+      "sleeping_2",
+      "temple_2",
+      "temple_3"
+     ],
+     "bamboo_1_in_train": true,
+     "scene_psnr": 20.658918538991976,
+     "scene_gain_psnr": 21.951498075289297,
+     "optimal_gain": 0.8560692143524279,
+     "minutes": 14.091591290632884
+    },
+    {
+     "rep": 1,
+     "fold": 4,
+     "test_scenes": [
+      "bamboo_2",
+      "bandage_1",
+      "cave_4",
+      "sleeping_1"
+     ],
+     "train_scenes": [
+      "alley_1",
+      "alley_2",
+      "ambush_2",
+      "ambush_4",
+      "ambush_5",
+      "ambush_6",
+      "ambush_7",
+      "bamboo_1",
+      "bandage_2",
+      "cave_2",
+      "market_2",
+      "market_5",
+      "market_6",
+      "mountain_1",
+      "shaman_2",
+      "shaman_3",
+      "sleeping_2",
+      "temple_2",
+      "temple_3"
+     ],
+     "bamboo_1_in_train": true,
+     "scene_psnr": 21.065368197683327,
+     "scene_gain_psnr": 22.003496512179304,
+     "optimal_gain": 0.8777206533875157,
+     "minutes": 14.727660151322683
+    },
+    {
+     "rep": 2,
+     "fold": 4,
+     "test_scenes": [
+      "ambush_6",
+      "bamboo_2",
+      "cave_4",
+      "shaman_3"
+     ],
+     "train_scenes": [
+      "alley_1",
+      "alley_2",
+      "ambush_2",
+      "ambush_4",
+      "ambush_5",
+      "ambush_7",
+      "bamboo_1",
+      "bandage_1",
+      "bandage_2",
+      "cave_2",
+      "market_2",
+      "market_5",
+      "market_6",
+      "mountain_1",
+      "shaman_2",
+      "sleeping_1",
+      "sleeping_2",
+      "temple_2",
+      "temple_3"
+     ],
+     "bamboo_1_in_train": true,
+     "scene_psnr": 21.11300742852719,
+     "scene_gain_psnr": 22.071337741763195,
+     "optimal_gain": 0.8773526787387281,
+     "minutes": 15.252003101507823
+    },
+    {
+     "rep": 3,
+     "fold": 2,
+     "test_scenes": [
+      "ambush_7",
+      "bamboo_1",
+      "bamboo_2",
+      "cave_2",
+      "mountain_1"
+     ],
+     "train_scenes": [
+      "alley_1",
+      "alley_2",
+      "ambush_2",
+      "ambush_4",
+      "ambush_5",
+      "ambush_6",
+      "bandage_1",
+      "bandage_2",
+      "cave_4",
+      "market_2",
+      "market_5",
+      "market_6",
+      "shaman_2",
+      "shaman_3",
+      "sleeping_1",
+      "sleeping_2",
+      "temple_2",
+      "temple_3"
+     ],
+     "bamboo_1_in_train": false,
+     "scene_psnr": 12.817812650911396,
+     "scene_gain_psnr": 20.35640744876721,
+     "optimal_gain": 0.5696138789118063,
+     "minutes": 13.92820057074229
+    },
+    {
+     "rep": 4,
+     "fold": 1,
+     "test_scenes": [
+      "ambush_6",
+      "bamboo_1",
+      "bamboo_2",
+      "bandage_1",
+      "temple_2"
+     ],
+     "train_scenes": [
+      "alley_1",
+      "alley_2",
+      "ambush_2",
+      "ambush_4",
+      "ambush_5",
+      "ambush_7",
+      "bandage_2",
+      "cave_2",
+      "cave_4",
+      "market_2",
+      "market_5",
+      "market_6",
+      "mountain_1",
+      "shaman_2",
+      "shaman_3",
+      "sleeping_1",
+      "sleeping_2",
+      "temple_3"
+     ],
+     "bamboo_1_in_train": false,
+     "scene_psnr": 15.015500129315333,
+     "scene_gain_psnr": 19.954196359564918,
+     "optimal_gain": 0.6510705803835228,
+     "minutes": 14.422768064339955
+    }
+   ]
+  },
+  "inter": {
+   "rep": 0,
+   "fold": 3,
+   "test_scenes": [
+    "ambush_4",
+    "ambush_5",
+    "sleeping_2",
+    "temple_2"
+   ],
+   "scenes_shown": [
+    "ambush_5",
+    "sleeping_2"
+   ],
+   "per_scene_psnr": {
+    "direct/ambush_5": 11.255032097282612,
+    "direct/sleeping_2": 16.86315072595506,
+    "unet/ambush_5": 13.3982061147891,
+    "unet/sleeping_2": 16.810408218969382
+   }
+  }
+ },
+ "seed": 42,
+ "epochs": 60
+}

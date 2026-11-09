@@ -1,0 +1,343 @@
+{
+ "gauge_compositions": [
+  {
+   "rep": 0,
+   "fold": 2,
+   "test_scenes": [
+    "bamboo_2",
+    "bandage_2",
+    "cave_4",
+    "market_5",
+    "mountain_1"
+   ],
+   "train_scenes": [
+    "alley_1",
+    "alley_2",
+    "ambush_2",
+    "ambush_4",
+    "ambush_5",
+    "ambush_6",
+    "ambush_7",
+    "bamboo_1",
+    "bandage_1",
+    "cave_2",
+    "market_2",
+    "market_6",
+    "shaman_2",
+    "shaman_3",
+    "sleeping_1",
+    "sleeping_2",
+    "temple_2",
+    "temple_3"
+   ],
+   "bamboo_1_in_train": true,
+   "scene_psnr": 20.658918538991976,
+   "scene_gain_psnr": 21.951498075289297,
+   "optimal_gain": 0.8560692143524279,
+   "minutes": 14.091591290632884
+  },
+  {
+   "rep": 1,
+   "fold": 4,
+   "test_scenes": [
+    "bamboo_2",
+    "bandage_1",
+    "cave_4",
+    "sleeping_1"
+   ],
+   "train_scenes": [
+    "alley_1",
+    "alley_2",
+    "ambush_2",
+    "ambush_4",
+    "ambush_5",
+    "ambush_6",
+    "ambush_7",
+    "bamboo_1",
+    "bandage_2",
+    "cave_2",
+    "market_2",
+    "market_5",
+    "market_6",
+    "mountain_1",
+    "shaman_2",
+    "shaman_3",
+    "sleeping_2",
+    "temple_2",
+    "temple_3"
+   ],
+   "bamboo_1_in_train": true,
+   "scene_psnr": 21.065368197683327,
+   "scene_gain_psnr": 22.003496512179304,
+   "optimal_gain": 0.8777206533875157,
+   "minutes": 14.727660151322683
+  },
+  {
+   "rep": 2,
+   "fold": 4,
+   "test_scenes": [
+    "ambush_6",
+    "bamboo_2",
+    "cave_4",
+    "shaman_3"
+   ],
+   "train_scenes": [
+    "alley_1",
+    "alley_2",
+    "ambush_2",
+    "ambush_4",
+    "ambush_5",
+    "ambush_7",
+    "bamboo_1",
+    "bandage_1",
+    "bandage_2",
+    "cave_2",
+    "market_2",
+    "market_5",
+    "market_6",
+    "mountain_1",
+    "shaman_2",
+    "sleeping_1",
+    "sleeping_2",
+    "temple_2",
+    "temple_3"
+   ],
+   "bamboo_1_in_train": true,
+   "scene_psnr": 21.11300742852719,
+   "scene_gain_psnr": 22.071337741763195,
+   "optimal_gain": 0.8773526787387281,
+   "minutes": 15.252003101507823
+  },
+  {
+   "rep": 3,
+   "fold": 2,
+   "test_scenes": [
+    "ambush_7",
+    "bamboo_1",
+    "bamboo_2",
+    "cave_2",
+    "mountain_1"
+   ],
+   "train_scenes": [
+    "alley_1",
+    "alley_2",
+    "ambush_2",
+    "ambush_4",
+    "ambush_5",
+    "ambush_6",
+    "bandage_1",
+    "bandage_2",
+    "cave_4",
+    "market_2",
+    "market_5",
+    "market_6",
+    "shaman_2",
+    "shaman_3",
+    "sleeping_1",
+    "sleeping_2",
+    "temple_2",
+    "temple_3"
+   ],
+   "bamboo_1_in_train": false,
+   "scene_psnr": 12.817812650911396,
+   "scene_gain_psnr": 20.35640744876721,
+   "optimal_gain": 0.5696138789118063,
+   "minutes": 13.92820057074229
+  },
+  {
+   "rep": 4,
+   "fold": 1,
+   "test_scenes": [
+    "ambush_6",
+    "bamboo_1",
+    "bamboo_2",
+    "bandage_1",
+    "temple_2"
+   ],
+   "train_scenes": [
+    "alley_1",
+    "alley_2",
+    "ambush_2",
+    "ambush_4",
+    "ambush_5",
+    "ambush_7",
+    "bandage_2",
+    "cave_2",
+    "cave_4",
+    "market_2",
+    "market_5",
+    "market_6",
+    "mountain_1",
+    "shaman_2",
+    "shaman_3",
+    "sleeping_1",
+    "sleeping_2",
+    "temple_3"
+   ],
+   "bamboo_1_in_train": false,
+   "scene_psnr": 15.015500129315333,
+   "scene_gain_psnr": 19.954196359564918,
+   "optimal_gain": 0.6510705803835228,
+   "minutes": 14.422768064339955
+  }
+ ],
+ "inter_psnr": {
+  "direct/ambush_5": 11.255032097282612,
+  "direct/sleeping_2": 16.86315072595506,
+  "unet/ambush_5": 13.3982061147891,
+  "unet/sleeping_2": 16.810408218969382
+ },
+ "flow_scene_epe": {
+  "raft_small": {
+   "ambush_4": 15.414022445678711,
+   "sleeping_2": 0.1664004772901535
+  },
+  "raft_large": {
+   "ambush_4": 6.0083441734313965,
+   "sleeping_2": 0.10193774849176407
+  }
+ },
+ "zoom_windows": {
+  "fig6": {
+   "order": [
+    "cave_4",
+    "temple_2",
+    "ambush_7",
+    "mountain_1",
+    "ambush_5",
+    "ambush_4",
+    "ambush_6",
+    "market_6",
+    "temple_3",
+    "bandage_2",
+    "market_2",
+    "alley_1",
+    "shaman_3",
+    "cave_2",
+    "shaman_2",
+    "sleeping_2",
+    "bandage_1",
+    "market_5",
+    "sleeping_1",
+    "ambush_2",
+    "alley_2",
+    "bamboo_2",
+    "bamboo_1"
+   ],
+   "flow_rank": {
+    "ambush_4": 1,
+    "market_5": 2,
+    "ambush_2": 3,
+    "temple_3": 4,
+    "cave_2": 5,
+    "ambush_6": 6,
+    "ambush_5": 7,
+    "cave_4": 8,
+    "market_6": 9,
+    "temple_2": 10,
+    "bamboo_2": 11,
+    "market_2": 12,
+    "bandage_1": 13,
+    "bamboo_1": 14,
+    "ambush_7": 15,
+    "bandage_2": 16,
+    "mountain_1": 17,
+    "alley_2": 18,
+    "alley_1": 19,
+    "shaman_2": 20,
+    "shaman_3": 21,
+    "sleeping_1": 22,
+    "sleeping_2": 23
+   },
+   "hardest_reflectance": [
+    "cave_4",
+    "temple_2",
+    "ambush_7",
+    "mountain_1",
+    "ambush_5"
+   ],
+   "hardest_flow": [
+    "ambush_4",
+    "market_5",
+    "ambush_2",
+    "temple_3",
+    "cave_2"
+   ],
+   "both": [],
+   "top_k": 5
+  },
+  "fig7": {
+   "scene": "bamboo_2",
+   "frame_tag": "f30",
+   "window_rc": [
+    1,
+    38
+   ],
+   "window_hw": [
+    128,
+    64
+   ],
+   "criterion": "max mean |mean(pred, compositions with bamboo_1 in train) - mean(pred, compositions without)| over 128x64 windows (network space)"
+  },
+  "fig8": {
+   "ambush_5": {
+    "frame_tag": "f30",
+    "window_rc": [
+     20,
+     0
+    ],
+    "window_hw": [
+     128,
+     64
+    ],
+    "criterion": "max mean |err_DirectCNN - err_UNet| (RGB L2 per pixel) over 128x64 windows",
+    "patch_rmse_direct": 0.7571514248847961,
+    "patch_rmse_unet": 0.22506141662597656
+   },
+   "sleeping_2": {
+    "frame_tag": "f30",
+    "window_rc": [
+     1,
+     190
+    ],
+    "window_hw": [
+     128,
+     64
+    ],
+    "criterion": "max mean |err_DirectCNN - err_UNet| (RGB L2 per pixel) over 128x64 windows",
+    "patch_rmse_direct": 0.22354722023010254,
+    "patch_rmse_unet": 0.23283864557743073
+   }
+  },
+  "fig9": {
+   "ambush_4": {
+    "pair": "ambush_4/frame_0031",
+    "window_rc": [
+     180,
+     340
+    ],
+    "window_hw": [
+     256,
+     256
+    ],
+    "criterion": "max mean |EPE_small - EPE_large| over 256x256 windows (valid pixels)",
+    "patch_epe_small": 11.133575919353852,
+    "patch_epe_large": 6.559473092455486
+   },
+   "sleeping_2": {
+    "pair": "sleeping_2/frame_0031",
+    "window_rc": [
+     38,
+     0
+    ],
+    "window_hw": [
+     256,
+     256
+    ],
+    "criterion": "max mean |EPE_small - EPE_large| over 256x256 windows (valid pixels)",
+    "patch_epe_small": 0.2954159605179833,
+    "patch_epe_large": 0.18055434022744266
+   }
+  }
+ }
+}
