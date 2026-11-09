@@ -60,7 +60,7 @@ for a, A in m2['archs'].items():
         for K, v in m['MDE_absolute'].items(): mac(f'mde{t}{K.replace("_", "")}', v, '{:.3g}')
         mac(f'hsixSim{t}', m['H6_sim_variance_reduction'])
         if 'share_test_side_vs_josaa_observed' in m:
-            mac(f'shareJosaa{t}', m['share_test_side_vs_josaa_observed']); mac(f'vPredObs{t}', m['V_pred_over_josaa_observed'])
+            mac(f'shareJosaa{t}', m['share_test_side_vs_josaa_observed']); mac(f'vPredObs{t}', m['V_pred_over_josaa_observed']); mac(f'vObsPred{t}', 1.0 / m['V_pred_over_josaa_observed'])
     if 'H4_gauge' in A:
         h = A['H4_gauge']; t = ARCH[a]
         mac(f'hfourRed{t}', h['interaction_reduction']); mac(f'hfourIccPsnr{t}', h['icc_psnr']); mac(f'hfourIccGain{t}', h['icc_scenegain_psnr'])
@@ -111,7 +111,8 @@ for y in ['R_PSNR_of_mean_mse', 'simse_R_gray_mean', 'lmse_R_chen_mean', 'dssim_
     for a in ['direct', 'unet']:   # per-architecture (round 2, B3): own rerun variance, run-bootstrap interval, mean shift
         c = m2['archs'][a]['metrics'][y]; cc = c['reml'] if c['used'] == 'reml' else c['moment']; v = nd['by_arch'][a][y]
         mac(f'ndRatio{ARCH[a]}{MET[y]}', v['nondet_var_single_run'] / cc['s2_seed']); mac(f'ndVar{ARCH[a]}{MET[y]}', v['nondet_var_single_run'], '{:.3g}')
-        mac(f'ndRatioLo{ARCH[a]}{MET[y]}', v['nondet_var_ci95_runboot'][0] / cc['s2_seed']); mac(f'ndRatioHi{ARCH[a]}{MET[y]}', v['nondet_var_ci95_runboot'][1] / cc['s2_seed'])
+        mac(f'ndRatioLo{ARCH[a]}{MET[y]}', v['ratio_ci95_jointboot_compositions'][0]); mac(f'ndRatioHi{ARCH[a]}{MET[y]}', v['ratio_ci95_jointboot_compositions'][1])   # series-2 round 3 (B1): joint ratio bootstrap
+        mac(f'ndRatioNumLo{ARCH[a]}{MET[y]}', v['nondet_var_ci95_runboot'][0] / cc['s2_seed']); mac(f'ndRatioNumHi{ARCH[a]}{MET[y]}', v['nondet_var_ci95_runboot'][1] / cc['s2_seed']); mac('ndNcompositions', v['n_compositions'], '{:d}')
         mac(f'ndSd{ARCH[a]}{MET[y]}', v['sd_diff_scene_level'], '{:.3g}'); mac(f'ndMeanDiff{ARCH[a]}{MET[y]}', v['mean_diff'], '{:+.3g}')
     mac('ndRuns', nd['by_arch']['direct']['R_PSNR_of_mean_mse']['n_runs'], '{:d}')
     for a in ['direct', 'unet']:
@@ -148,6 +149,7 @@ for a, A in fl['archs'].items():
     mac(f'flowSceneMinName{t}', min(tab, key=tab.get).replace('_', r'\_')); mac(f'flowSceneMaxName{t}', max(tab, key=tab.get).replace('_', r'\_'))
 for p in fl['pairs']:
     tt = 'RaftSRaftL' + MET[p['metric']]; mac(f'gap{tt}', p['mean_gap'], '{:+.3g}'); mac(f'ishare{tt}', p['share_interaction_K1S3']); mac(f'gapMdeKone{tt}', p['gap_over_MDE_K1']); mac(f'gapMdeFull{tt}', p['gap_over_MDE_fullcov'])
+    mac(f'gapMdeKfive{tt}', abs(p['mean_gap']) / p['MDE_paired']['paired_K5_S3'])   # five random partitions, three seeds (Table 9 row)
     mac(f'mdePairKone{tt}', p['MDE_paired']['paired_K1_S3'], '{:.3g}'); mac(f'mdePairFull{tt}', p['MDE_paired']['paired_fullcov_5fold_S3'], '{:.3g}')
 xt = fl['FH3_cross_task']
 for k, v2 in xt.items():
@@ -516,6 +518,7 @@ if Qs.exists():
         mac('qPatchRmseDirect' + sc.replace('_', ''), z['patch_rmse_direct'], '{:.2f}'); mac('qPatchRmseUnet' + sc.replace('_', ''), z['patch_rmse_unet'], '{:.2f}')
     for sc, z in Z.get('fig9', {}).items():
         mac('qPatchEpeRaftS' + sc.replace('_', ''), z['patch_epe_small'], '{:.2f}'); mac('qPatchEpeRaftL' + sc.replace('_', ''), z['patch_epe_large'], '{:.2f}')
+        if 'n_masked_pixels_in_crop' in z: mac('qFlowMasked' + sc.replace('_', ''), z['n_masked_pixels_in_crop'], '{:d}')
 # sibling-family structure of the interaction (round 9, A1/C1): family_effect.py -> family_effect.json
 FE = R / 'family_effect.json'
 if FE.exists():
@@ -626,5 +629,79 @@ if FJ.exists():
     mac('fjPairDsizeMaxPairDsize', pr[zk]['joint_ols']['size4']['est'], '{:+.2g}'); mac('fjPairDsizeMaxPairSe', pr[zk]['joint_ols']['size4']['se_cluster'], '{:.2g}'); mac('fjPairDsizeMaxPairGap', pr[zk]['gap_observed'], '{:+.2g}')
     _pn = {'proposed': 'Proposed', 'direct': 'DirectCNN', 'unet': 'UNet', 'transformer': 'TransUNet'}; _pm = {'simse_R_gray_mean': 'si-MSE', 'lmse_R_chen_mean': 'LMSE', 'R_PSNR_of_mean_mse': 'PSNR'}
     _b, _a = zk.split('|')[0].split(' - '); mac('fjPairDsizeMaxPairName', f"{_pn[_b]}--{_pn[_a]} under {_pm[zk.split('|')[1]]}")
+    # series-2 round 7 (B1): implied shift of the full-coverage (mixture) target of the pair relative to the 18-scene target,
+    # (8/23) x method-by-size coefficient (the convention of target_shift_mixture_minus_18_joint in family_joint.py), and its size against the gap
+    _sh = 8 / 23 * pr[zk]['joint_ols']['size4']['est']; mac('fjPairDsizeMaxPairShift', _sh, '{:+.2g}'); mac('fjPairDsizeMaxPairShiftOverGapPct', 100 * _sh / pr[zk]['gap_observed'], '{:.0f}')
+# series-2 round 1 (B1): centred structured paired generator — power at +MDE and -MDE, generated-mean check
+if FJ.exists():
+    sp = fj['structured_paired']
+    if 'power_minus' in next(iter(sp.values())):
+        mac('fjDecPowerMinusMin', min(min(v['power_minus'].values()) for v in sp.values())); mac('fjDecPowerMinusMax', max(max(v['power_minus'].values()) for v in sp.values()))
+        mac('fjDecNullMeanMaxAbsSe', max(abs(x) for v in sp.values() for x in v['null_generated_mean_minus_target_over_se'].values()), '{:.3f}')
+        mac('fjDecPowerMeanMaxAbsSe', max(abs(x) for v in sp.values() for lab in ('power', 'power_minus') for x in v[lab + '_generated_mean_minus_target_over_se'].values()), '{:.3f}')
+        mac('fjDecShiftExpMaxAbs', max(abs(x) for v in sp.values() for x in v['sibling_shift_expectation'].values()), '{:.3f}')
+        mac('fjDecShiftExpMaxAbsOverSe', max(abs(v['sibling_shift_expectation'][k]) / v['se_primary'][k] for v in sp.values() for k in ('one', 'full')), '{:.3f}')
+# series-2 round 1 (A1): target-reconstruction consistency audit (target_consistency_audit.py -> target_consistency_audit.json)
+TC = R / 'target_consistency_audit.json'
+if TC.exists():
+    tc = json.load(open(TC)); pf = tc['pooled_frame_weighted']
+    mac('tcRecon3Gt', pf['recon3_gt_targets'], '{:.4f}'); mac('tcRecon3GtXtwo', pf['recon3_gt_targets_x2'], '{:.4f}'); mac('tcRecon2Gt', pf['recon2_gt_targets'], '{:.4f}'); mac('tcRecon2GtXtwo', pf['recon2_gt_targets_x2'], '{:.4f}')
+    mac('tcMseCF', pf['mse_C_vs_F'], '{:.4f}'); mac('tcFracSclampPct', 100 * pf['frac_S_clamped'], '{:.1f}'); mac('tcFracFbelowCPct', 100 * pf['frac_F_below_C'], '{:.0f}')
+    for a, t in [('direct', 'Direct'), ('unet', 'Unet'), ('transformer', 'Trans'), ('proposed', 'Prop')]:
+        x = tc['archs'][a]; mac(f'tcAchievedRecon{t}', x['achieved_recon_mse_mean'], '{:.4f}'); mac(f'tcAlphaMed{t}', x['alpha_median'], '{:.2f}'); mac(f'tcAlphaQfive{t}', x['alpha_q05']); mac(f'tcAlphaQninetyfive{t}', x['alpha_q95'])
+        mac(f'tcFracAlphaBelowOnePct{t}', 100 * x['frac_alpha_below_1'], '{:.0f}')
+    ach3 = [tc['archs'][a]['achieved_recon_mse_mean'] for a in ('unet', 'transformer', 'proposed')]; mac('tcAchievedRecon3Min', min(ach3), '{:.4f}'); mac('tcAchievedRecon3Max', max(ach3), '{:.4f}')
+    am = [tc['archs'][a]['alpha_median'] for a in tc['archs']]; mac('tcAlphaMedMin', min(am)); mac('tcAlphaMedMax', max(am))
+    fb = [100 * tc['archs'][a]['frac_alpha_below_1'] for a in tc['archs']]; mac('tcFracAlphaBelowOnePctMin', min(fb), '{:.0f}'); mac('tcFracAlphaBelowOnePctMax', max(fb), '{:.0f}')
+    mac('tcBrighterPctMin', 100 * (1 / max(am) - 1), '{:.0f}'); mac('tcBrighterPctMax', 100 * (1 / min(am) - 1), '{:.0f}')
+    mac('tcNsceneRows', tc['archs']['direct']['n_scene_rows'], '{:d}'); mac('tcNcells', tc['archs']['direct']['n_cells'], '{:d}'); mac('tcSceneMeanReconthreeGt', pf['scene_mean_recon3_gt_targets'], '{:.4f}')
+    # series-2 round 3 (C1): alpha = cos(theta) ||x||/||xhat||; RMS-magnitude ratio and angular agreement reported separately
+    if 'norm_ratio_median' in tc['archs']['direct']:
+        nr = [tc['archs'][a]['norm_ratio_median'] for a in tc['archs']]; mac('tcNormRatioMedMin', min(nr)); mac('tcNormRatioMedMax', max(nr))
+        mac('tcNormExcessPctMin', 100 * (min(nr) - 1), '{:.0f}'); mac('tcNormExcessPctMax', 100 * (max(nr) - 1), '{:.0f}')
+        fa = [100 * tc['archs'][a]['frac_norm_ratio_above_1'] for a in tc['archs']]; mac('tcFracNormAboveOnePctMin', min(fa), '{:.0f}'); mac('tcFracNormAboveOnePctMax', max(fa), '{:.0f}')
+        cs = [tc['archs'][a]['cos_median'] for a in tc['archs']]; mac('tcCosMedMin', min(cs)); mac('tcCosMedMax', max(cs)); mac('tcCosMin', min(tc['archs'][a]['cos_min'] for a in tc['archs']))
+        for a, t in [('direct', 'Direct'), ('unet', 'Unet'), ('transformer', 'Trans'), ('proposed', 'Prop')]:
+            mac(f'tcNormRatioMed{t}', tc['archs'][a]['norm_ratio_median']); mac(f'tcCosMed{t}', tc['archs'][a]['cos_median'])
+# series-2 round 3 (A1): flow evaluation mask audit (flow_mask_audit.py -> flow_mask_audit.json)
+FM = R / 'flow_mask_audit.json'
+if FM.exists():
+    fm = json.load(open(FM)); t_ = fm['total']
+    mac('fmCutoffPx', fm['max_flow_cutoff'], '{:.0f}'); mac('fmCutPixels', t_['n_cut_beyond_mask'], '{:,d}'); mac('fmValidPixelsM', (t_['n_pixels'] - t_['n_invalid']) / 1e6, '{:.1f}')
+    mac('fmCutFracPct', 100 * t_['frac_cut_of_dataset_valid'], '{:.4f}'); mac('fmInvalidPct', 100 * t_['frac_invalid'], '{:.3f}'); mac('fmPairsWithCut', t_['pairs_with_cut'], '{:d}')
+    mac('fmScenesWithCut', len(fm['scenes_with_cut']), '{:d}'); mac('fmMaxMag', t_['max_mag'], '{:.0f}'); mac('fmNpairs', t_['n_pairs'], '{:,d}')
+    for sc, n, frac, mx in fm['scenes_with_cut']:
+        tag = sc.replace('_', '').replace('2', 'two').replace('4', 'four'); mac(f'fmCutPixels{tag}', n, '{:,d}'); mac(f'fmCutFracPct{tag}', 100 * frac, '{:.3f}'); mac(f'fmBoundPx{tag}', frac * 2 * t_['max_mag'], '{:.2f}')
+    mac('fmBoundPxMax', max(frac for _, _, frac, _ in fm['scenes_with_cut']) * 2 * t_['max_mag'], '{:.2f}')
+
+    fc = [100 * tc['archs'][a]['frac_cells_alpha_below_1'] for a in tc['archs']]; mac('tcFracCellsAlphaBelowOnePctMin', min(fc), '{:.0f}'); mac('tcFracCellsAlphaBelowOnePctMax', max(fc), '{:.0f}')
+# series-2 round 1 (C3): RGB (single-gain) versus channel-mean si-MSE (rgb_simse_control.py -> rgb_simse_control.json)
+RS = R / 'rgb_simse_control.json'
+if RS.exists():
+    rs = json.load(open(RS)); G, Rg = 'simse_R_gray_mean', 'simse_R_rgb_mean'
+    sh = [rs['archs'][a][Rg]['test_share'] for a in rs['archs']]; mac('rsShareRgbMin', min(sh)); mac('rsShareRgbMax', max(sh))
+    ic = [rs['archs'][a][Rg]['icc'] for a in rs['archs']]; mac('rsIccRgbMin', min(ic)); mac('rsIccRgbMax', max(ic))
+    dsh = [abs(rs['archs'][a][Rg]['test_share'] - rs['archs'][a][G]['test_share']) for a in rs['archs']]; mac('rsShareMaxDiff', max(dsh)); dic = [abs(rs['archs'][a][Rg]['icc'] - rs['archs'][a][G]['icc']) for a in rs['archs']]; mac('rsIccMaxDiff', max(dic))
+    ra = [rs['archs'][a]['rgb_over_gray_mean_ratio'] for a in rs['archs']]; mac('rsRatioMin', min(ra)); mac('rsRatioMax', max(ra))
+    mac('rsRatioSceneMin', min(rs['archs'][a]['rgb_over_gray_per_scene_min'] for a in rs['archs'])); mac('rsRatioSceneMax', max(rs['archs'][a]['rgb_over_gray_per_scene_max'] for a in rs['archs']))
+    mac('rsSpearmanMin', min(rs['archs'][a]['spearman_scene_tables'] for a in rs['archs']), '{:.3f}')
+    mac('rsPairMaxChangeKone', max(abs(v[Rg]['gap_over_mde_K1'] - v[G]['gap_over_mde_K1']) for v in rs['pairs'].values())); mac('rsPairMaxChangeFull', max(abs(v[Rg]['gap_over_mde_full'] - v[G]['gap_over_mde_full']) for v in rs['pairs'].values()))
+    mac('rsPairCountFullRgb', sum(v[Rg]['gap_over_mde_full'] >= 1 for v in rs['pairs'].values()), '{:d}'); mac('rsPairCountKoneRgb', sum(v[Rg]['gap_over_mde_K1'] >= 1 for v in rs['pairs'].values()), '{:d}')
+# series-2 round 5 (B1): expectation offset of the unweighted systematic fold mean (stratification_offset.py -> stratification_offset.json)
+SO = R / 'stratification_offset.json'
+if SO.exists():
+    so = json.load(open(SO)); w_ = so['design_weights_unweighted_systematic']; W_ = so['population_weights']
+    for i, nm in enumerate(['Hard', 'Mid', 'Easy']): mac(f'soDesignW{nm}', w_[i]); mac(f'soPopW{nm}', W_[i], '{:.3f}')
+    recs = [v for a in so['models'] for v in so['models'][a].values()]
+    mac('soBiasOverSceneSdMaxAbs', max(abs(v['bias_over_between_scene_sd']) for v in recs), '{:.3f}'); mac('soBiasOverFoldSdMaxAbs', max(abs(v['bias_over_systematic_fold_sd']) for v in recs), '{:.3f}')
+    mac('soRedMseVsVarMaxDiff', max(abs(v['reduction_mse'] - v['reduction_variance']) for v in recs), '{:.3f}')
+    mac('soBiasPsnrDirect', so['models']['direct']['R_PSNR_of_mean_mse']['bias_unweighted_systematic'], '{:+.3f}'); mac('soBiasPsnrUnet', so['models']['unet']['R_PSNR_of_mean_mse']['bias_unweighted_systematic'], '{:+.3f}')
+# series-2 round 9 (A1): distinct training compositions of the realised design (composition_distinctness_check.py -> composition_distinctness.json)
+CD = R / 'composition_distinctness.json'
+if CD.exists():
+    cd = json.load(open(CD)); cr = cd['random']; assert cr['all_distinct'] and cd['run_records_mismatching_fold_file'] == []
+    mac('cdNcompositionsRandom', cr['n_compositions'], '{:d}'); mac('cdNdistinctRandom', cr['n_distinct'], '{:d}')
+    mac('cdMaxSharedRandom', cr['max_shared_heldout_units_between_assignments'], '{:d}'); mac('cdComponentsRandom', cr['connected_components'], '{:d}')
+    mac('cdRankRandom', cr['rank_U_plus_KR_minus_c'], '{:d}'); mac('cdResidDfRandom', cd['U'] * cr['R'] - cr['rank_U_plus_KR_minus_c'], '{:d}')
 lines = ['% numbers.tex — GENERATED by make_numbers.py; do not edit by hand.'] + [f'\\newcommand{{\\{k}}}{{{v}}}' for k, v in sorted(M.items())]
 out.write_text('\n'.join(lines) + '\n'); print(out, len(M), 'macros')

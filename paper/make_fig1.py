@@ -38,7 +38,7 @@ ax1.set_xticks(x); ax1.set_xticklabels([s.replace('_', ' ') for s in scenes], fo
 ax1.set_ylabel('scene difficulty / hardest scene'); ax1.set_ylim(0, 1.08)
 ax1.set_title('(a) Scene difficulty, same 23 scenes, two tasks', fontsize=8.5, loc='left')
 ax1.legend(frameon=False, fontsize=7, loc='upper right')
-ax1.text(0.99, 0.80, f'Spearman $\\rho$ = {rho:.2f} (p = {p:.2f})\nsi-MSE {xi.min():.4f}–{xi.max():.4f}; EPE {xf.min():.2f}–{xf.max():.1f} px', transform=ax1.transAxes, fontsize=6.5, va='top', ha='right', color='0.2')
+ax1.text(0.99, 0.80, f'Spearman $\\rho$ = {rho:.2f} (descriptive)\nsi-MSE {xi.min():.4f}–{xi.max():.4f}; EPE {xf.min():.2f}–{xf.max():.1f} px', transform=ax1.transAxes, fontsize=6.5, va='top', ha='right', color='0.2')
 
 xb = np.arange(3); wb = 0.36
 b1 = ax2.bar(xb - wb / 2, li, wb, color='0.25', label='intrinsic (UNet − DirectCNN, si-MSE)')

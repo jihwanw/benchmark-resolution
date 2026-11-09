@@ -1,0 +1,267 @@
+{
+ "max_flow_cutoff": 400.0,
+ "definition_source": "experiment_flow.py:31, 66, 87; read_flo 36-43",
+ "total": {
+  "n_pairs": 1041,
+  "n_pixels": 464769024,
+  "n_invalid": 344309,
+  "n_cut_beyond_mask": 3664,
+  "n_ge400_total": 3687,
+  "pairs_with_cut": 5,
+  "max_mag": 455.44061279296875,
+  "frac_cut_of_dataset_valid": 7.889330351421974e-06,
+  "frac_invalid": 0.0007408174431177238
+ },
+ "per_scene": {
+  "alley_1": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 6195,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 48.713680267333984,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "alley_2": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 2336,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 41.693485260009766,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "ambush_2": {
+   "n_pairs": 20,
+   "n_pixels": 8929280,
+   "n_invalid": 6702,
+   "n_cut_beyond_mask": 1589,
+   "n_ge400_total": 1591,
+   "max_mag": 455.44061279296875,
+   "pairs_with_cut": 2,
+   "frac_cut_of_dataset_valid": 0.00017808754375697248
+  },
+  "ambush_4": {
+   "n_pairs": 32,
+   "n_pixels": 14286848,
+   "n_invalid": 53621,
+   "n_cut_beyond_mask": 19,
+   "n_ge400_total": 27,
+   "max_mag": 421.1315612792969,
+   "pairs_with_cut": 1,
+   "frac_cut_of_dataset_valid": 1.3349045862895322e-06
+  },
+  "ambush_5": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 66555,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 360.0882263183594,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "ambush_6": {
+   "n_pairs": 19,
+   "n_pixels": 8482816,
+   "n_invalid": 4029,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 359.62530517578125,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "ambush_7": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 98,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 96.66630554199219,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "bamboo_1": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 3472,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 95.75955200195312,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "bamboo_2": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 10234,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 167.73707580566406,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "bandage_1": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 1724,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 144.07806396484375,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "bandage_2": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 2531,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 40.025062561035156,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "cave_2": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 7477,
+   "n_cut_beyond_mask": 2056,
+   "n_ge400_total": 2069,
+   "max_mag": 446.78472900390625,
+   "pairs_with_cut": 2,
+   "frac_cut_of_dataset_valid": 9.401324480175574e-05
+  },
+  "cave_4": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 20873,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 344.0066833496094,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "market_2": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 20910,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 91.3045883178711,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "market_5": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 15237,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 384.0889892578125,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "market_6": {
+   "n_pairs": 39,
+   "n_pixels": 17412096,
+   "n_invalid": 9325,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 256.34600830078125,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "mountain_1": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 4503,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 105.5030746459961,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "shaman_2": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 30103,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 24.168170928955078,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "shaman_3": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 249,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 19.029457092285156,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "sleeping_1": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 44,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 8.40999984741211,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "sleeping_2": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 895,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 8.81453800201416,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "temple_2": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 31673,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 312.0742492675781,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  },
+  "temple_3": {
+   "n_pairs": 49,
+   "n_pixels": 21876736,
+   "n_invalid": 45523,
+   "n_cut_beyond_mask": 0,
+   "n_ge400_total": 0,
+   "max_mag": 329.5439758300781,
+   "pairs_with_cut": 0,
+   "frac_cut_of_dataset_valid": 0.0
+  }
+ },
+ "scenes_with_cut": [
+  [
+   "ambush_2",
+   1589,
+   0.00017808754375697248,
+   455.44061279296875
+  ],
+  [
+   "ambush_4",
+   19,
+   1.3349045862895322e-06,
+   421.1315612792969
+  ],
+  [
+   "cave_2",
+   2056,
+   9.401324480175574e-05,
+   446.78472900390625
+  ]
+ ]
+}

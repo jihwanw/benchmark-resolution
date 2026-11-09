@@ -1,0 +1,175 @@
+{
+ "strata_sizes": [
+  8,
+  8,
+  7
+ ],
+ "population_weights": [
+  0.34782608695652173,
+  0.34782608695652173,
+  0.30434782608695654
+ ],
+ "design_weights_unweighted_systematic": [
+  0.33999999999999997,
+  0.36,
+  0.3
+ ],
+ "models": {
+  "direct": {
+   "simse_R_gray_mean": {
+    "mu_U": 0.020065982200964807,
+    "stratum_means_hard_to_easy": [
+     0.031847846696904686,
+     0.017086795791517943,
+     0.010005778673544205
+    ],
+    "bias_unweighted_systematic": -8.473423700749647e-05,
+    "bias_over_between_scene_sd": -0.007743700049481439,
+    "bias_over_systematic_fold_sd": -0.0316967991203863,
+    "var_random": 2.1057613894800342e-05,
+    "var_systematic_unweighted": 7.146395234528255e-06,
+    "var_systematic_weighted": 7.441058477189889e-06,
+    "mse_systematic_unweighted": 7.153575125449497e-06,
+    "reduction_variance": 0.6606265424833875,
+    "reduction_mse": 0.6602855783571995,
+    "reduction_weighted": 0.6466333500859147,
+    "bias_sq_over_var_systematic": 0.0010046870744781218
+   },
+   "lmse_R_chen_mean": {
+    "mu_U": 0.009131695541730739,
+    "stratum_means_hard_to_easy": [
+     0.012622327385940048,
+     0.008548497653682718,
+     0.005808913877546415
+    ],
+    "bias_unweighted_systematic": -1.9970911921419685e-05,
+    "bias_over_between_scene_sd": -0.004989945081098829,
+    "bias_over_systematic_fold_sd": -0.016069412465034176,
+    "var_random": 2.815601071465017e-06,
+    "var_systematic_unweighted": 1.54452803652733e-06,
+    "var_systematic_weighted": 1.7507235031073492e-06,
+    "mse_systematic_unweighted": 1.5449268738503031e-06,
+    "reduction_variance": 0.45143932065501047,
+    "reduction_mse": 0.45129766801571614,
+    "reduction_weighted": 0.3782061241380297,
+    "bias_sq_over_var_systematic": 0.00025822601697139577
+   },
+   "dssim_R_mean": {
+    "mu_U": 0.23016041664439352,
+    "stratum_means_hard_to_easy": [
+     0.23517617229835103,
+     0.23012318418920039,
+     0.22447067584580574
+    ],
+    "bias_unweighted_systematic": -1.4969001100317847e-05,
+    "bias_over_between_scene_sd": -0.00036490324714295587,
+    "bias_over_systematic_fold_sd": -0.0008408324077063933,
+    "var_random": 0.0002984081840152691,
+    "var_systematic_unweighted": 0.00031693248541000204,
+    "var_systematic_weighted": 0.00036695960347995924,
+    "mse_systematic_unweighted": 0.000316932709480996,
+    "reduction_variance": -0.06207705547976872,
+    "reduction_mse": -0.06207780636733151,
+    "reduction_weighted": -0.2297236575159829,
+    "bias_sq_over_var_systematic": 7.069991378493303e-07
+   },
+   "R_PSNR_of_mean_mse": {
+    "mu_U": 15.502288002543821,
+    "stratum_means_hard_to_easy": [
+     13.60854111585195,
+     16.44731390495757,
+     16.586540556004532
+    ],
+    "bias_unweighted_systematic": 0.021611149431926435,
+    "bias_over_between_scene_sd": 0.012322814367559715,
+    "bias_over_systematic_fold_sd": 0.044030554026612316,
+    "var_random": 0.5418262327315109,
+    "var_systematic_unweighted": 0.24090589777534904,
+    "var_systematic_weighted": 0.23701102320130016,
+    "mse_systematic_unweighted": 0.2413729395551181,
+    "reduction_variance": 0.5553816274991539,
+    "reduction_mse": 0.5545196504453398,
+    "reduction_weighted": 0.5625700475843418,
+    "bias_sq_over_var_systematic": 0.001938689687890426
+   }
+  },
+  "unet": {
+   "simse_R_gray_mean": {
+    "mu_U": 0.020914278765792098,
+    "stratum_means_hard_to_easy": [
+     0.030437455438962917,
+     0.0189278011333663,
+     0.012300908433512073
+    ],
+    "bias_unweighted_systematic": -6.126297847921722e-05,
+    "bias_over_between_scene_sd": -0.006010753102932207,
+    "bias_over_systematic_fold_sd": -0.020260019079067913,
+    "var_random": 1.830100501864098e-05,
+    "var_systematic_unweighted": 9.14358517793813e-06,
+    "var_systematic_weighted": 1.0113227616326946e-05,
+    "mse_systematic_unweighted": 9.147338330470274e-06,
+    "reduction_variance": 0.5003779754923467,
+    "reduction_mse": 0.5001728964527901,
+    "reduction_weighted": 0.44739495967429943,
+    "bias_sq_over_var_systematic": 0.00041046837308419596
+   },
+   "lmse_R_chen_mean": {
+    "mu_U": 0.010198526121194823,
+    "stratum_means_hard_to_easy": [
+     0.01350666579804348,
+     0.009656896745242798,
+     0.007036800063027242
+    ],
+    "bias_unweighted_systematic": -1.873690266446064e-05,
+    "bias_over_between_scene_sd": -0.004609841007135513,
+    "bias_over_systematic_fold_sd": -0.013961198097017086,
+    "var_random": 2.9128691947390552e-06,
+    "var_systematic_unweighted": 1.8011514108702371e-06,
+    "var_systematic_weighted": 2.0572913545080452e-06,
+    "mse_systematic_unweighted": 1.8015024823916946e-06,
+    "reduction_variance": 0.38165729716826835,
+    "reduction_mse": 0.381536772868004,
+    "reduction_weighted": 0.2937233988317335,
+    "bias_sq_over_var_systematic": 0.00019491505230415353
+   },
+   "dssim_R_mean": {
+    "mu_U": 0.2314178922706367,
+    "stratum_means_hard_to_easy": [
+     0.22432621118810142,
+     0.23759493138392768,
+     0.2324631973783445
+    ],
+    "bias_unweighted_systematic": 0.0001261540450350762,
+    "bias_over_between_scene_sd": 0.0032124760628917427,
+    "bias_over_systematic_fold_sd": 0.007425536080032202,
+    "var_random": 0.00027600270772582257,
+    "var_systematic_unweighted": 0.00028863349990179834,
+    "var_systematic_weighted": 0.00033256795868526364,
+    "mse_systematic_unweighted": 0.00028864941474487704,
+    "reduction_variance": -0.0457632908026504,
+    "reduction_mse": -0.04582095271187536,
+    "reduction_weighted": -0.20494455081807472,
+    "bias_sq_over_var_systematic": 5.5138586075859996e-05
+   },
+   "R_PSNR_of_mean_mse": {
+    "mu_U": 15.691667219574983,
+    "stratum_means_hard_to_easy": [
+     14.692176989382705,
+     16.069360507514443,
+     16.40229229643535
+    ],
+    "bias_unweighted_systematic": 0.00933042845093901,
+    "bias_over_between_scene_sd": 0.007186787713504516,
+    "bias_over_systematic_fold_sd": 0.01990105046144366,
+    "var_random": 0.295592237012192,
+    "var_systematic_unweighted": 0.21981188570967092,
+    "var_systematic_weighted": 0.243264258114041,
+    "mse_systematic_unweighted": 0.21989894260474901,
+    "reduction_variance": 0.25636786699305447,
+    "reduction_mse": 0.2560733501411979,
+    "reduction_weighted": 0.17702758173582434,
+    "bias_sq_over_var_systematic": 0.00039605180946892697
+   }
+  }
+ }
+}

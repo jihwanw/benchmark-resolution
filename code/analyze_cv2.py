@@ -424,8 +424,24 @@ def nondeterminism_control(df, df1):
             within = np.array([np.var(by_run[r], ddof=1) for r in runs if len(by_run[r]) > 1]); inv_n = np.array([1.0 / len(by_run[r]) for r in runs if len(by_run[r]) > 1])
             pair_means = np.array([np.mean(by_run[r]) for r in runs if len(by_run[r]) > 1])
             v_e_nd = float(within.mean() / 2); v_z_nd = float(max(np.var(pair_means, ddof=1) / 2 - v_e_nd * inv_n.mean(), 0.0))
+            # series-2 round 3 (B1): joint bootstrap of the RATIO nondet/seed. The numerator (rerun differences, seeds 42-43) and the denominator
+            # (pooled within-cell variance over the three main-experiment seeds, analyze_cv2.moment_components' s2_seed) share the main-experiment
+            # runs, so both are recomputed on the same resample of the 25 training compositions (rep, fold) drawn with replacement; 1000 replicates.
+            comps = sorted({r[:2] for r in runs})
+            cell_var = df[(df['design'] == 'rand') & (df['arch'] == arch)].groupby(['rep', 'fold', 'scene'])[ycol].var(ddof=1).dropna()
+            cell_by_comp = {c: cell_var.loc[c].values for c in comps if c in cell_var.index.droplevel(2)}
+            runs_by_comp = {c: [r for r in runs if r[:2] == c] for c in comps}
+            s2_seed_full = float(np.mean(np.concatenate([cell_by_comp[c] for c in comps])))
+            ratio_boots = []; rng_joint = np.random.RandomState(1)        # own stream, so the earlier run-bootstrap draws are unchanged
+            for _ in range(1000):
+                pick = [comps[k] for k in rng_joint.choice(len(comps), size=len(comps), replace=True)]
+                num = float(np.var(np.concatenate([by_run[r] for c in pick for r in runs_by_comp[c]]), ddof=1) / 2)
+                den = float(np.mean(np.concatenate([cell_by_comp[c] for c in pick])))
+                ratio_boots.append(num / den if den > 0 else np.nan)
             out['by_arch'][arch][ycol] = {'sd_diff_scene_level': float(dd.std(ddof=1)), 'mean_diff': float(dd.mean()), 'mean_abs_diff': float(dd.abs().mean()),
                                           'nondet_var_single_run': v, 'nondet_var_ci95_runboot': [float(np.percentile(boots, 2.5)), float(np.percentile(boots, 97.5))], 'n_runs': len(runs),
+                                          's2_seed_denominator': s2_seed_full, 'ratio_point': v / s2_seed_full if s2_seed_full > 0 else float('nan'),
+                                          'ratio_ci95_jointboot_compositions': [float(np.nanpercentile(ratio_boots, 2.5)), float(np.nanpercentile(ratio_boots, 97.5))], 'n_compositions': len(comps),
                                           'nondet_var_run_level': v_z_nd, 'nondet_var_scene_level': v_e_nd, 'run_level_share': v_z_nd / (v_z_nd + v_e_nd) if (v_z_nd + v_e_nd) > 0 else float('nan'),
                                           'run_level_share_ci95_runboot': [float(np.nanpercentile(boots_share, 2.5)), float(np.nanpercentile(boots_share, 97.5))],
                                           'mean_pair_shift_sd': float(np.std(pair_means, ddof=1))}

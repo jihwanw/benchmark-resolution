@@ -35,10 +35,13 @@ def main():
                'experiment_cv_v1_killing.py', 'experiment_cv2.py', 'experiment_flow.py', 'experiment_v8.py', 'v7_base.py', 'family_effect.py', 'family_joint.py',
                'make_strata.py', 'make_summary_cv.py', 'make_summary_cv2.py', 'make_summary_flow.py', 'qual_display_check.py', 'qual_flow.py', 'qual_intrinsic.py',
                'strata_v2.json', 'trainsize_adjust.py', 'trainsize_check.py', 'validate_estimators.py', 'validate_misspec.py', 'validate_pilot_power.py',
-               'validate_power.py', 'validate_r2_precision.py', 'make_release.py']
+               'validate_power.py', 'validate_r2_precision.py', 'make_release.py',
+               # series-2 review analyses (2026-11-09/10): loss-target audit, RGB si-MSE control, flow mask audit, stratification offset, composition distinctness
+               'target_consistency_audit.py', 'rgb_simse_control.py', 'flow_mask_audit.py', 'stratification_offset.py', 'composition_distinctness_check.py',
+               'INTERFACE_CARD_sintel_loader_and_losses.md']
     for f in current: cp(CODE / f, OUT / 'code' / f)
     for f in ['analyze_cv_round3_backup.py', 'analyze_cv2_pre_round2.py', 'analyze_cv2_round2a_backup_before_fixedgamma.py', 'analyze_cv2_round3_backup.py',
-              'analyze_flow_round3_backup.py', 'bootstrap_components_round3_backup.py']:
+              'analyze_flow_round3_backup.py', 'bootstrap_components_round3_backup.py', 'family_joint_pre_series2.py', 'analyze_cv2_pre_series2.py']:
         cp(CODE / f, OUT / 'code' / 'history' / f)
     for f in sorted((CODE / 'launch').iterdir()):
         if f.suffix in ('.sh', '.txt'):
@@ -229,7 +232,10 @@ Every number, table, and figure in the manuscript is generated from the files in
 - `code/` — analysis (`analyze_cv.py` killing experiment, `analyze_cv2.py` main experiment, `analyze_flow.py` flow arm;
   `bootstrap_components.py` intervals; `validate_*.py`, `calibrate_diagnostics.py`, `compare_q3_forms.py` estimator and power
   validation; `trainsize_check.py`, `trainsize_adjust.py`, `family_effect.py`, `family_joint.py` the training-size and sibling-family
-  analyses), training and evaluation (`v7_base.py`, `experiment_v8.py`, `experiment_cv_v1_killing.py`, `experiment_cv2.py`,
+  analyses; `target_consistency_audit.py` the reconstruction-loss/target audit and gain decomposition, `rgb_simse_control.py` the
+  RGB single-gain si-MSE control, `flow_mask_audit.py` the 400-px cutoff audit, `stratification_offset.py` the systematic-fold-mean
+  offset, `composition_distinctness_check.py` the distinct-composition check of Proposition 1; `INTERFACE_CARD_sintel_loader_and_losses.md`
+  records, with file-and-line sources, the input/target encodings, losses, and flow mask conventions these analyses rely on), training and evaluation (`v7_base.py`, `experiment_v8.py`, `experiment_cv_v1_killing.py`, `experiment_cv2.py`,
   `experiment_flow.py`), qualitative renders (`qual_intrinsic.py`, `qual_flow.py`, `qual_display_check.py`), strata (`make_strata.py`,
   `strata_v2.json`), summaries (`make_summary_*.py`), and this assembly script (`make_release.py`).
   `code/history/` holds the analysis versions replaced during review (single-start REML; equal-fold moment forms; unconditional Q3).
@@ -237,7 +243,8 @@ Every number, table, and figure in the manuscript is generated from the files in
 - `results/` — aggregates (`killing_v1.json`, `main_v2.json`, `flow_v1.json`), validation outputs (`estimator_validation.json`,
   `estimator_misspec.json`, `estimator_q3_comparison.json`, `calibration_diagnostics.json`, `power_validation.json`,
   `pilot_power_validation.json`, `r2_precision.json`, `bootstrap_ci.json`, `trainsize_check.json`, `trainsize_adjust.json`,
-  `family_effect.json`, `family_joint.json`), the pre-2026-11-04 single-start-REML results and the review-round archives, and the
+  `family_effect.json`, `family_joint.json`, `target_consistency_audit.json`, `rgb_simse_control.json`, `flow_mask_audit.json`,
+  `stratification_offset.json`, `composition_distinctness.json`), the pre-2026-11-04 single-start-REML results and the review-round archives, and the
   per-run records: `results_cv_v1/` (killing experiment, 100 runs + parity), `results_cv_v2/` (main experiment, 340 runs),
   `results_flow_v1/` (flow arm, 150 runs + 2 zero-shot). Each per-run JSON carries the architecture, design, repeat, fold, fold seed,
   model seed, the held-out and training scene lists, and per-scene and per-frame scores; `cv_folds_v2.json` / the flow fold file are the
@@ -268,6 +275,8 @@ python3 code/bootstrap_components.py; python3 code/validate_estimators.py; pytho
 python3 code/calibrate_diagnostics.py; python3 code/validate_power.py; python3 code/validate_pilot_power.py --n-pilot 200 --n-eval 1000
 python3 code/validate_r2_precision.py; python3 code/trainsize_check.py; python3 code/trainsize_adjust.py
 python3 code/family_effect.py; python3 code/family_joint.py
+python3 code/target_consistency_audit.py; python3 code/rgb_simse_control.py; python3 code/stratification_offset.py
+python3 code/composition_distinctness_check.py   # flow_mask_audit.py needs the MPI-Sintel flow extras (invalid/occlusion masks)
 python3 paper/make_numbers.py; python3 paper/make_tables.py; python3 paper/make_figs.py; python3 paper/make_fig1.py
 ```
 Training runs (`experiment_cv2.py`, `experiment_flow.py`) were executed on NVIDIA T4 GPUs (g4dn.xlarge) from the launch scripts in

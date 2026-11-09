@@ -106,7 +106,7 @@ STATS['fig7'] = {'scene': sc, 'frame_tag': ftag, 'window_rc': [i7, j7], 'window_
 lab = lambda c: f"training set {c['rep']+1}{'' if c['bamboo_1_in_train'] else '*'}"
 ctx = [('input (final pass)', inp, None), ('ground-truth albedo', gt, None)] + \
       [(f"{lab(c)}\n{c['scene_psnr']:.1f} / {c['scene_gain_psnr']:.1f} dB, gain {c['optimal_gain']:.2f}", p, None) for c, p in zip(comps, preds)] + \
-      [('|group mean difference|\n(darker = larger)', diff_map, 'gray_r')]
+      [(f'|group mean difference|\ndarker = larger, scale 0\u2013{diff_map.max():.2f}', diff_map, 'gray_r')]
 crop_w = TW / 3 / IN; crop_h = crop_w * (PH * ASPECT / PW); ctx_h = TW / 4 / IN * ASPECT
 fig, gs = grid([ctx_h, ctx_h, crop_h, crop_h], hspace_cm=0.75)
 for k, (t, im, cm) in enumerate(ctx):
@@ -127,7 +127,10 @@ for r, s in enumerate(inter['scenes_shown']):
     ed, eu = np.linalg.norm(pd_ - gt, axis=-1), np.linalg.norm(pu - gt, axis=-1)
     i8, j8 = best_window(np.abs(ed - eu), PH, PW)
     STATS['fig8'][s] = {'frame_tag': ft, 'window_rc': [i8, j8], 'window_hw': [PH, PW], 'criterion': 'max mean |err_DirectCNN - err_UNet| (RGB L2 per pixel) over 128x64 windows',
-                        'patch_rmse_direct': float(np.sqrt((ed[i8:i8 + PH, j8:j8 + PW] ** 2).mean())), 'patch_rmse_unet': float(np.sqrt((eu[i8:i8 + PH, j8:j8 + PW] ** 2).mean()))}
+                        # series-2 round 1 (C2): RMSE in the per-channel convention of Table 4 (MSE = mean over all channel values); the per-pixel
+                        # RGB L2 norm squared sums the three channels, so divide by 3 before the root (previously the RMS of the vector norm, sqrt(3) x larger)
+                        'patch_rmse_direct': float(np.sqrt((ed[i8:i8 + PH, j8:j8 + PW] ** 2).mean() / 3.0)), 'patch_rmse_unet': float(np.sqrt((eu[i8:i8 + PH, j8:j8 + PW] ** 2).mean() / 3.0)),
+                        'patch_rmse_convention': 'sqrt(mean over pixels and channels of squared error) = Table 4 MSE convention'}
     row = [('input\n ', inp), ('ground-truth albedo\n ', gt), (f"DirectCNN\n{ps[f'direct/{s}']:.1f} dB", pd_), (f"UNet\n{ps[f'unet/{s}']:.1f} dB", pu)]
     for c, (t, im) in enumerate(row):
         ax = fig.add_subplot(gs[2 * r, c * 3:(c + 1) * 3]); show(ax, im, t, fs=6.2); box(ax, i8, j8, PH, PW)
@@ -153,17 +156,23 @@ for r, s in enumerate(mf['scenes_shown']):
     mm = max(np.percentile(np.linalg.norm(gt, axis=0), 99), 1e-6)
     i9, j9 = best_window(np.abs(es - el), ZP, ZP)
     vcount = max(valid[i9:i9 + ZP, j9:j9 + ZP].sum(), 1)
-    STATS['fig9'][s] = {'pair': pair, 'window_rc': [i9, j9], 'window_hw': [ZP, ZP], 'criterion': 'max mean |EPE_small - EPE_large| over 256x256 windows (valid pixels)',
+    STATS['fig9'][s] = {'pair': pair, 'window_rc': [i9, j9], 'window_hw': [ZP, ZP], 'criterion': 'max sum over a fixed 256x256 window of |EPE_small - EPE_large| with invalid pixels counting zero (series-2 round 3, C2: fixed-area, zero-masked objective)',
                         'patch_epe_small': float(es[i9:i9 + ZP, j9:j9 + ZP].sum() / vcount), 'patch_epe_large': float(el[i9:i9 + ZP, j9:j9 + ZP].sum() / vcount)}
     row = [('frame\n ', img), ('ground-truth flow\n ', flow_rgb(gt, mm)), (f'RAFT-small\nscene EPE {sm[s]:.2f} px', flow_rgb(qf[bs + 'pred'], mm)), (f'RAFT-large\nscene EPE {lg[s]:.2f} px', flow_rgb(qf[bl + 'pred'], mm))]
     for c, (t, im) in enumerate(row):
         ax = fig.add_subplot(gs[2 * r, c * 3:(c + 1) * 3]); show(ax, im, t, aspect='equal', fs=6.2, interp='antialiased'); box(ax, i9, j9, ZP, ZP)
         if c == 0: ax.text(-0.035, 0.5, s.replace('_', ' '), transform=ax.transAxes, rotation=90, va='center', ha='right', fontsize=7.5)
     cut = lambda a: a[i9:i9 + ZP, j9:j9 + ZP]
-    emax = max(cut(es).max(), cut(el).max(), 1e-6)
-    for c, (t, im, cm) in enumerate([('frame', cut(img), None), (f'end-point error, RAFT-small\npatch mean {STATS["fig9"][s]["patch_epe_small"]:.2f} px', cut(es), 'gray_r'),
-                                      (f'end-point error, RAFT-large\npatch mean {STATS["fig9"][s]["patch_epe_large"]:.2f} px', cut(el), 'gray_r')]):
-        ax = fig.add_subplot(gs[2 * r + 1, c * 4:(c + 1) * 4]); show(ax, im, t, aspect='equal', cmap=cm, vmin=0 if cm else None, vmax=emax if cm else None, fs=6.6, interp='antialiased')
+    # series-2 round 1 (C3): one grey scale per scene, 0..99th percentile of the two crops' valid EPEs (values above are clipped), stated in the titles
+    vv = np.concatenate([cut(es)[cut(valid) > 0], cut(el)[cut(valid) > 0]]); emax = max(float(np.percentile(vv, 99)) if vv.size else 1e-6, 1e-6)
+    STATS['fig9'][s]['error_map_scale_max_px'] = float(emax); STATS['fig9'][s]['error_map_scale_rule'] = '99th percentile of valid EPE over the two crops; clipped above'
+    # series-2 round 3 (C2): pixels outside the evaluation mask are drawn in a distinct colour (light blue), not as zero error
+    masked = lambda a: np.ma.array(a, mask=(cut(valid) == 0))
+    cm_err = plt.get_cmap('gray_r').copy(); cm_err.set_bad('#9ecae1')
+    STATS['fig9'][s]['n_masked_pixels_in_crop'] = int((cut(valid) == 0).sum())
+    for c, (t, im, cm) in enumerate([('frame', cut(img), None), (f'end-point error, RAFT-small\npatch mean {STATS["fig9"][s]["patch_epe_small"]:.2f} px\nscale 0\u2013{emax:.1f} px', masked(cut(es)), cm_err),
+                                      (f'end-point error, RAFT-large\npatch mean {STATS["fig9"][s]["patch_epe_large"]:.2f} px\nscale 0\u2013{emax:.1f} px', masked(cut(el)), cm_err)]):
+        ax = fig.add_subplot(gs[2 * r + 1, c * 4:(c + 1) * 4]); show(ax, im, t, aspect='equal', cmap=cm, vmin=0 if cm is not None else None, vmax=emax if cm is not None else None, fs=6.6, interp='nearest' if cm is not None else 'antialiased')
 fig.savefig(OUT / 'fig9_flow_interaction.pdf', dpi=220); fig.savefig(OUT / 'fig9_flow_interaction.png', dpi=160); plt.close(fig)
 
 json.dump({'gauge_compositions': comps, 'inter_psnr': ps, 'flow_scene_epe': {'raft_small': sm, 'raft_large': lg}, 'zoom_windows': STATS},

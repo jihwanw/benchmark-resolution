@@ -7838,6 +7838,13 @@
       0.23161679505450797
      ],
      "n_runs": 50,
+     "s2_seed_denominator": 0.30839511449477125,
+     "ratio_point": 0.4311265097471484,
+     "ratio_ci95_jointboot_compositions": [
+      0.21151656917910427,
+      1.3992973571036005
+     ],
+     "n_compositions": 25,
      "nondet_var_run_level": 0.004916661904463812,
      "nondet_var_scene_level": 0.11710642750314966,
      "run_level_share": 0.04029288168602166,
@@ -7857,6 +7864,13 @@
       1.4762448515733273e-06
      ],
      "n_runs": 50,
+     "s2_seed_denominator": 1.972118418085129e-06,
+     "ratio_point": 0.5124404931162024,
+     "ratio_ci95_jointboot_compositions": [
+      0.31464590789159635,
+      0.7632645525274702
+     ],
+     "n_compositions": 25,
      "nondet_var_run_level": 0.0,
      "nondet_var_scene_level": 1.022173231300759e-06,
      "run_level_share": 0.0,
@@ -7876,6 +7890,13 @@
       1.8942720844606595e-07
      ],
      "n_runs": 50,
+     "s2_seed_denominator": 3.4933740348087064e-07,
+     "ratio_point": 0.37710682839355264,
+     "ratio_ci95_jointboot_compositions": [
+      0.21857368813818984,
+      0.6160543441651986
+     ],
+     "n_compositions": 25,
      "nondet_var_run_level": 4.0881553763983764e-10,
      "nondet_var_scene_level": 1.3364996207955662e-07,
      "run_level_share": 0.003049524580980489,
@@ -7895,6 +7916,13 @@
       5.516204638886892e-05
      ],
      "n_runs": 50,
+     "s2_seed_denominator": 5.9888851918031386e-05,
+     "ratio_point": 0.5734609682658098,
+     "ratio_ci95_jointboot_compositions": [
+      0.3064385444342347,
+      1.1698191030830218
+     ],
+     "n_compositions": 25,
      "nondet_var_run_level": 1.391078850600273e-06,
      "nondet_var_scene_level": 3.088025429359322e-05,
      "run_level_share": 0.04310571380440683,
@@ -7917,6 +7945,13 @@
       0.2762278204477381
      ],
      "n_runs": 50,
+     "s2_seed_denominator": 0.2831141113354505,
+     "ratio_point": 0.7320184311671307,
+     "ratio_ci95_jointboot_compositions": [
+      0.4728608447700791,
+      1.1790446125042167
+     ],
+     "n_compositions": 25,
      "nondet_var_run_level": 0.02613900648420777,
      "nondet_var_scene_level": 0.1827153677640047,
      "run_level_share": 0.12515422086943187,
@@ -7936,6 +7971,13 @@
       6.447938724545326e-06
      ],
      "n_runs": 50,
+     "s2_seed_denominator": 5.301805729778561e-06,
+     "ratio_point": 0.8876241671837636,
+     "ratio_ci95_jointboot_compositions": [
+      0.5989552170577973,
+      1.2310502121162525
+     ],
+     "n_compositions": 25,
      "nondet_var_run_level": 5.1237454046876236e-08,
      "nondet_var_scene_level": 4.60174705324351e-06,
      "run_level_share": 0.011011739662274053,
@@ -7955,6 +7997,13 @@
       1.1203844854358104e-06
      ],
      "n_runs": 50,
+     "s2_seed_denominator": 7.72181227498688e-07,
+     "ratio_point": 1.0549856722539797,
+     "ratio_ci95_jointboot_compositions": [
+      0.7412056548308085,
+      1.4557643120826997
+     ],
+     "n_compositions": 25,
      "nondet_var_run_level": 4.706730954297212e-08,
      "nondet_var_scene_level": 7.555693354632796e-07,
      "run_level_share": 0.05864086798903321,
@@ -7974,6 +8023,13 @@
       6.77746752592639e-05
      ],
      "n_runs": 50,
+     "s2_seed_denominator": 5.270453865972431e-05,
+     "ratio_point": 0.7877697727741677,
+     "ratio_ci95_jointboot_compositions": [
+      0.4872497105296467,
+      1.0708578598260048
+     ],
+     "n_compositions": 25,
      "nondet_var_run_level": 3.0601517219906953e-06,
      "nondet_var_scene_level": 3.702966372550775e-05,
      "run_level_share": 0.07633239733912632,

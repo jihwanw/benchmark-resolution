@@ -214,27 +214,32 @@ def structured_absolute(d, ycol, fit, members, rng, n_sim=N_DESIGN):
            'ratio_empirical_over_primary': {k: emp[k] / pr0[k] for k in emp}, 'ratio_empirical_over_joint_exchangeable': {k: emp[k] / prj[k] for k in emp},
            'ratio_empirical_over_joint_plus_closed': {k: emp[k] / (prj[k] + closed[k]) for k in emp},
            'mde_factor_vs_primary': {k: math.sqrt(emp[k] / pr0[k]) for k in emp}, 'p_share_fold': p, 'q_both_in_five': q,
-           'mean_shift_one_partition': float(one.mean() - g.mean() - gam.values.mean())}
+           'mean_shift_one_partition': float(one.mean() - g.mean() - gam.values.mean()), 'expected_shift_one_partition': 2 * b_bam / N * q}
     return out
 
 
 def structured_paired(dd, pfit, b_bam_pair, rng, n_sim=N_DEC):
-    """Null rejection and power of the normal rule with the reported (primary) paired SE, under the structured paired generator."""
+    """Null rejection and power of the normal rule with the reported (primary) paired SE, under the structured paired generator.
+    Series-2 round 1 (B1): the deterministic sibling shift has a nonzero expectation, (2 b/n) q for a partition of n and (2 b/U) p for
+    full coverage, so the generator is centred by subtracting that expectation from every score; the realised mean of the generated
+    gaps is recorded for both the null and the alternative, and power is evaluated at +MDE and at -MDE."""
     cj, c0 = pfit['joint_adjusted'], pfit['primary']
     gaps = adjust(dd, 'y', pfit['joint_ols']['size4']['est'], b_bam_pair).groupby('scene')['y'].mean().sort_index()
     g = gaps.values - gaps.values.mean(); g = g * math.sqrt(cj['s2_scene'] / g.var(ddof=1)) if g.var(ddof=1) > 0 and cj['s2_scene'] > 0 else g * 0.0
     scenes = list(gaps.index); bam_idx = [scenes.index(s) for s in FE.families(scenes)[1][FE.FOCAL_FAMILY]]
     se0 = {'one': math.sqrt(predicted_var(c0)['one']), 'full': math.sqrt(predicted_var(c0)['full'])}
     mde0 = {k: A.Z_MDE * v for k, v in se0.items()}
-    out = {'n_sim': n_sim, 'se_primary': se0, 'mde_primary': mde0, 'method_by_sibling_effect': b_bam_pair}
-    for true_mean, label in [(0.0, 'null'), (None, 'power')]:
-        res = {}
+    p, q = p_share_fold(), q_both_in_five()
+    shift_mean = {'one': 2 * b_bam_pair / N * q, 'full': 2 * b_bam_pair / U * p}          # E[sibling contribution] per design
+    out = {'n_sim': n_sim, 'se_primary': se0, 'mde_primary': mde0, 'method_by_sibling_effect': b_bam_pair, 'sibling_shift_expectation': shift_mean}
+    for label, sign in [('null', 0.0), ('power', 1.0), ('power_minus', -1.0)]:
+        res, means = {}, {}
         for design in ['one', 'full']:
-            tm = mde0[design] if true_mean is None else 0.0
+            tm = sign * mde0[design]
             one, _, full = structured_design_scores(cj, g + tm, b_bam_pair, bam_idx, rng, n_sim)
-            val = one if design == 'one' else full
-            res[design] = float((np.abs(val) >= Z975 * se0[design]).mean())
-        out[label] = res
+            val = (one if design == 'one' else full) - shift_mean[design]                # centred: E[val] = tm
+            res[design] = float((np.abs(val) >= Z975 * se0[design]).mean()); means[design] = float(val.mean())
+        out[label] = res; out[label + '_generated_mean'] = means; out[label + '_generated_mean_minus_target_over_se'] = {k: (means[k] - sign * mde0[k]) / se0[k] for k in means}
     return out
 
 
@@ -283,7 +288,7 @@ def main():
     for a2 in ['unet', 'proposed', 'transformer']:
         key = f'{a2} - direct|R_PSNR_of_mean_mse'; dd = B.pair_frame(df, 'direct', a2, 'R_PSNR_of_mean_mse'); dd = with_indicators(FE.add_sibling_columns(dd, fam, members, held_i), members)
         pf = fit_all(dd, 'y', members); sp = structured_paired(dd, pf, pf['joint_ols']['bam_abs']['est'], rng); out['structured_paired'][key] = sp
-        print(f"  paired decisions {key}: null one {sp['null']['one']:.3f} full {sp['null']['full']:.3f} | power one {sp['power']['one']:.3f} full {sp['power']['full']:.3f} (dbam {sp['method_by_sibling_effect']:+.3g})", flush=True)
+        print(f"  paired decisions {key}: null one {sp['null']['one']:.3f} full {sp['null']['full']:.3f} | power(+) one {sp['power']['one']:.3f} full {sp['power']['full']:.3f} | power(-) one {sp['power_minus']['one']:.3f} full {sp['power_minus']['full']:.3f} | null mean/SE one {sp['null_generated_mean_minus_target_over_se']['one']:+.3f} full {sp['null_generated_mean_minus_target_over_se']['full']:+.3f} (dbam {sp['method_by_sibling_effect']:+.3g}; E[shift] one {sp['sibling_shift_expectation']['one']:+.4f} full {sp['sibling_shift_expectation']['full']:+.4f})", flush=True)
     (R / 'family_joint.json').write_text(json.dumps(out, indent=1, default=float)); print('wrote', R / 'family_joint.json')
 
 

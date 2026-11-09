@@ -75,13 +75,13 @@ sc = sorted(ref_tab); x = np.array([ref_tab[s] for s in sc]); y = np.array([mp['
 ax1.axhline(0, color='0.6', linewidth=0.6); ax1.scatter(x, y, s=20, color='0.15')
 for s_, xx, yy in zip(sc, x, y):
     if abs(yy) > 1.8: ax1.annotate(s_.replace('_', ' '), (xx, yy), fontsize=5.6, xytext=(3, 2), textcoords='offset points')
-ax1.set_xlabel('scene difficulty: Proposed model, reflectance PSNR (dB)'); ax1.set_ylabel('UNet − DirectCNN (dB)'); ax1.set_title(f'(a) Intrinsic: Spearman ρ = {rho:.2f} ({pfmt(p)})', loc='left', fontsize=8.5)
+ax1.set_xlabel('reference: Proposed model, reflectance PSNR (dB)\n(higher = easier)'); ax1.set_ylabel('UNet − DirectCNN (dB)'); ax1.set_title(f'(a) Intrinsic: Spearman ρ = {rho:.2f} (descriptive)', loc='left', fontsize=8.5)
 fp = next(p for p in fl['pairs'] if p['metric'] == 'epe_mean'); zs_tab = fl['zeroshot']['raft_large']['per_scene_epe']
 sc2 = sorted(set(zs_tab) & set(fp['per_scene_gap'])); x2 = np.array([zs_tab[s] for s in sc2]); y2 = np.array([fp['per_scene_gap'][s] for s in sc2]); rho2, p2 = spearmanr(x2, y2)
 ax2.axhline(0, color='0.6', linewidth=0.6); ax2.scatter(x2, y2, s=20, color='0.15')
 for s_, xx, yy in zip(sc2, x2, y2):
     if yy > 2.0: ax2.annotate(s_.replace('_', ' '), (xx, yy), fontsize=5.6, xytext=(3, 2), textcoords='offset points')
-ax2.set_xlabel('scene difficulty: zero-shot RAFT-large (C+T) EPE (px)'); ax2.set_ylabel('RAFT-small − RAFT-large EPE (px)'); ax2.set_title(f'(b) Flow: Spearman ρ = {rho2:.2f} ({pfmt(p2)})', loc='left', fontsize=8.5)
+ax2.set_xlabel('reference: zero-shot RAFT-large (C+T) EPE (px)\n(higher = harder)'); ax2.set_ylabel('RAFT-small − RAFT-large EPE (px)'); ax2.set_title(f'(b) Flow: Spearman ρ = {rho2:.2f} (descriptive)', loc='left', fontsize=8.5)
 fig.tight_layout(w_pad=2); fig.savefig(OUT / 'fig5_gap_vs_difficulty.pdf'); fig.savefig(OUT / 'fig5_gap_vs_difficulty.png', dpi=220)
 # the coupled versions (difficulty = one member of the pair) are kept for the record
 kp = next(p for p in k1['pairs'] if p['metric'] == 'R_PSNR_of_mean_mse'); ktab = {r['scene']: r['psnr'] for r in k1['archs']['direct']['metrics']['R_PSNR_of_mean_mse']['scene_table']}

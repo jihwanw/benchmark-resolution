@@ -1,4 +1,4 @@
-\begin{table*}[!t]\centering\caption{Resolution. Top: minimum detectable effect (two-sided $\alpha=0.05$, power $0.8$) of a difference between two independently evaluated absolute scores, each under $K$ partitions with three seeds, or each under the full-coverage five-fold design (all 23 scenes scored, three seeds); the factor of two of Eq.~\eqref{eq:seabs} is included, and the standard error of one score alone is the MDE divided by $z\sqrt2\approx3.96$. Full-coverage scores target the mixture of 18- and 19-scene training sets (Sec.~\ref{sec:designs}). Bottom: paired comparisons, with the actual mean gap, the share of the paired variance due to the scene$\times$method interaction under the prevailing recipe, and the gap divided by the MDE. The ratio is a plug-in power assessment: a value $\ge 1$ means that a true gap of the observed size would be detected with power $\ge0.8$ under that design; it is not a verdict on the observed gap, whose own uncertainty Sec.~\ref{sec:results2} reports.}\label{tab:resolution}
+\begin{table*}[!t]\centering\caption{Resolution. Top: minimum detectable effect (two-sided $\alpha=0.05$, power $0.8$) of a difference between two independently evaluated absolute scores, each under $K$ partitions with three seeds, or each under the full-coverage five-fold design (all 23 scenes scored, three seeds); the factor of two of Eq.~\eqref{eq:seabs} is included, and the standard error of one score alone is the MDE divided by $z\sqrt2\approx3.96$. Full-coverage scores target the mixture of 18- and 19-scene training sets (Sec.~\ref{sec:designs}; for one si-MSE pair the mixture and fixed-18-scene targets differ measurably, Sec.~\ref{sec:results3}). Bottom: paired comparisons (the six intrinsic architecture pairs under si-MSE, LMSE, and PSNR, and the flow pair under EPE), with the actual mean gap, the share of the paired variance due to the scene$\times$method interaction under the prevailing recipe, and the gap divided by the MDE. The ratio is a plug-in power assessment: a value $\ge 1$ means that a true gap of the observed size would be detected with power $\ge0.8$ under that design; it is not a verdict on the observed gap, whose own uncertainty Sec.~\ref{sec:results2} reports.}\label{tab:resolution}
 \footnotesize\resizebox{\textwidth}{!}{\begin{tabular}{llrrrrrr}\toprule
 \multicolumn{8}{l}{\textit{Absolute scores}}\\
 Model & Metric & $K{=}1$ & $K{=}3$ & $K{=}5$ & $K{=}10$ & $K{=}23$ & full cov.\ \\\midrule
@@ -21,6 +21,12 @@ TransUNet$-$Proposed & si-MSE & -0.000881 & 0.04 & 0.00606 & 0.00277 & 0.15 & 0.
 UNet$-$DirectCNN & si-MSE & +0.000848 & 0.76 & 0.0067 & 0.00154 & 0.13 & 0.55 \\
 UNet$-$Proposed & si-MSE & +0.000123 & 0.11 & 0.00342 & 0.0015 & 0.04 & 0.08 \\
 UNet$-$TransUNet & si-MSE & +0.001 & 0.07 & 0.00544 & 0.00243 & 0.18 & 0.41 \\
+Proposed$-$DirectCNN & LMSE & +0.000688 & 0.73 & 0.00291 & 0.000696 & 0.24 & 0.99 \\
+TransUNet$-$DirectCNN & LMSE & +0.000317 & 0.67 & 0.00317 & 0.000851 & 0.10 & 0.37 \\
+TransUNet$-$Proposed & LMSE & -0.000371 & 0.00 & 0.00274 & 0.00128 & 0.14 & 0.29 \\
+UNet$-$DirectCNN & LMSE & +0.00107 & 0.84 & 0.0028 & 0.000517 & 0.38 & 2.06 \\
+UNet$-$Proposed & LMSE & +0.000379 & 0.06 & 0.00121 & 0.00054 & 0.31 & 0.70 \\
+UNet$-$TransUNet & LMSE & +0.00075 & 0.08 & 0.00225 & 0.00101 & 0.33 & 0.74 \\
 Proposed$-$DirectCNN & PSNR & +0.0856 & 0.81 & 1.81 & 0.367 & 0.05 & 0.23 \\
 TransUNet$-$DirectCNN & PSNR & +0.288 & 0.70 & 1.72 & 0.435 & 0.17 & 0.66 \\
 TransUNet$-$Proposed & PSNR & +0.202 & 0.22 & 1.15 & 0.47 & 0.18 & 0.43 \\

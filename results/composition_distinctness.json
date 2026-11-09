@@ -1,0 +1,26 @@
+{
+ "U": 23,
+ "random": {
+  "R": 5,
+  "K": 5,
+  "n_compositions": 25,
+  "n_distinct": 25,
+  "all_distinct": true,
+  "max_shared_heldout_units_between_assignments": 3,
+  "connected_components": 1,
+  "rank_U_plus_KR_minus_c": 47
+ },
+ "stratified": {
+  "R": 2,
+  "K": 5,
+  "n_compositions": 10,
+  "n_distinct": 10,
+  "all_distinct": true,
+  "max_shared_heldout_units_between_assignments": 3,
+  "connected_components": 1,
+  "rank_U_plus_KR_minus_c": 32
+ },
+ "run_records_checked": 35,
+ "run_records_mismatching_fold_file": [],
+ "control_repeated_fold_detected": true
+}
