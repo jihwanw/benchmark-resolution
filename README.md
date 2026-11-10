@@ -26,8 +26,11 @@ Every number, table, and figure in the manuscript is generated from the files in
   `results_flow_v1/` (flow arm, 150 runs + 2 zero-shot). Each per-run JSON carries the architecture, design, repeat, fold, fold seed,
   model seed, the held-out and training scene lists, and per-scene and per-frame scores; `cv_folds_v2.json` / the flow fold file are the
   shared fold assignments (seeds 201–205). `results/qual/*.json` are the metadata of the display runs.
-- `paper/` — `make_numbers.py` (→ `numbers.tex`, every macro the manuscript cites), `make_tables.py` (→ `tables/*.tex`),
-  `make_figs.py`, `make_fig1.py`, `make_qual_figs.py` (→ `figs/`), `design_mde.py` (MDE and design-search functions);
+- `paper/` — `make_numbers.py` (→ `numbers.tex`, every macro the manuscript cites), `make_tables.py` (→ `tables/*.tex`;
+  `tab_resolution.tex` is the paired-comparison block of the main text and `tab_resolution_abs.tex` the absolute-score ladder of the
+  supplement), `make_figs.py`, `make_fig1.py`, `make_qual_figs.py` (→ `figs/`; `fig7_gauge_top` and `fig10_interaction_ctx` are the
+  compact main-text versions of the full-page `fig7_gauge`, `fig8_interaction` and `fig9_flow_interaction`, which are in the
+  supplement), `design_mde.py` (MDE and design-search functions);
   `external/numbers_josaa.tex` carries the observed partition and seed variances of the earlier study that the killing experiment
   tests against (its repository: https://github.com/jihwanw/sintel-scene-partition-variance).
 - `prereg/` — the pre-registration text of each stage, verbatim (`PREREGISTRATION_ko.md`) and in English translation

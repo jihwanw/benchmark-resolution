@@ -16,6 +16,12 @@ _LMSE_BOUNDARY = (f'{_NPOS} positions per axis at ${_HW}\\times{_HW}$; the last 
                   f'columns, {_FRAC_NEVER:.1f}\\% of the pixels, enter no window')
 _SSIM_MAP = f'{_HW - 11 + 1}\\times{_HW - 11 + 1}'
 assert (_K, _STEP, _NPOS, _LAST, _NEVER) == (26, 13, 18, 246, 9) and abs(_FRAC_NEVER - 6.9) < 0.05, (_K, _STEP, _NPOS, _LAST, _NEVER, _FRAC_NEVER)  # checked against Fn.unfold/conv2d
+import re as _re0
+def _supp(t):
+    """Supplement-bound table: \\ref/\\eqref to main-text labels get the xr prefix M- (own labels tab:design/tab:family/tab:controls excepted);
+    [!t] floats become [!htb] so they stay near their section in the supplement."""
+    t = _re0.sub(r'\\(ref|eqref)\{(?!M-)(?!tab:design\})(?!tab:family\})(?!tab:controls\})(?!tab:decomp_flow\})(?!eq:nondet\})(?!tab:metrics\})', lambda m: '\\' + m.group(1) + '{M-', t)   # eq:nondet is a supplement equation since pass 4
+    return t.replace('[!t]', '[!htb]')
 MN = {'simse_R_gray_mean': 'si-MSE', 'lmse_R_chen_mean': 'LMSE', 'dssim_R_mean': 'DSSIM', 'R_PSNR_of_mean_mse': 'PSNR', 'R_siPSNR_scenegain_rgb': 'PSNR, scene gain',
       'epe_mean': 'EPE', 'epe_pixel_weighted': 'EPE (pixel-w.)', 'fl_all_mean': 'Fl-all', 'out3_mean': '$>$3\\,px rate', 'epe_occ_mean': 'EPE occ.', 'epe_noc_mean': 'EPE non-occ.'}
 def g(x): return f'{x:.3g}'
@@ -54,10 +60,10 @@ rows = [
 ]
 L = ['\\begin{table*}[!t]\\centering\\caption{The experimental programme. All runs use MPI Sintel (23 scenes); folds are shared across experiments (fold-assignment seeds 201--205). GPU hours on a single NVIDIA T4 per run; see Sec.~\\ref{sec:programme} for recipes.}\\label{tab:design}', '\\small\\resizebox{\\textwidth}{!}{\\begin{tabular}{p{2.3cm}p{1.5cm}p{3.6cm}p{4.6cm}p{2.2cm}p{1.6cm}r}\\toprule', 'Experiment & Task & Models & Design & Seeds & Runs & GPU-h \\\\\\midrule']
 L += [' & '.join(r) + ' \\\\' for r in rows] + ['\\bottomrule\\end{tabular}}\\end{table*}']
-(T / 'tab_design.tex').write_text('\n'.join(L) + '\n')
+(T / 'tab_design.tex').write_text(_supp('\n'.join(L)) + '\n')   # length cut 2026-11-10: this table is in the supplement (Table S2)
 
 # ---- T2 intrinsic decomposition (shares of total scene-level variance + ICC + test-side share of predicted partition variance)
-L = ['\\begin{table*}[!t]\\centering\\caption{Variance components of the scene-level score (random design; design-exact method of moments, Sec.~\\ref{sec:estimation}, with the REML cross-check in Supplementary Table~S1). Shares are fractions of $\\sigma^2_{\\mathrm{scene}}+\\sigma^2_{\\mathrm{train}}+\\sigma^2_{\\mathrm{inter}}+\\sigma^2_{\\mathrm{seed}}$ (``0.00\'\' denotes a share below 0.005, not a zero component; Supplementary Table~S1 gives the values). ``Test share\'\' is $V_{\\mathrm{test}}$ divided by the predicted variance of a random 5-of-23 partition mean averaged over six seeds (Eq.~\\ref{eq:partvar}); ICC is $\\sigma^2_{\\mathrm{scene}}/(\\sigma^2_{\\mathrm{scene}}+\\sigma^2_{\\mathrm{inter}}+\\sigma^2_{\\mathrm{seed}})$. Brackets: 95\\% parametric-bootstrap intervals of the moment estimator on the actual design, conditional on the 23 scenes (Sec.~\\ref{sec:estimation}). For PSNR the last two columns compare with the partition variance observed in the earlier single-partition grid, whose score is the frame-pooled run-level PSNR averaged over six seeds and not the unit-equal scene-mean PSNR modelled here (Sec.~\\ref{sec:partvar}): an approximate check across the two aggregations, not a same-statistic validation of Eq.~\\eqref{eq:partvar} \\citep{woo2026partition}.}\\label{tab:decomp}',
+L = ['\\begin{table*}[!t]\\centering\\caption{Variance components of the scene-level score (random design; design-exact method of moments, Sec.~\\ref{sec:estimation}, with the REML cross-check in Supplementary Table~\\ref{S-tab:remlmom}). Shares are fractions of $\\sigma^2_{\\mathrm{scene}}+\\sigma^2_{\\mathrm{train}}+\\sigma^2_{\\mathrm{inter}}+\\sigma^2_{\\mathrm{seed}}$ (``0.00\'\' denotes a share below 0.005, not a zero component; Supplementary Table~\\ref{S-tab:remlmom} gives the values). ``Test share\'\' is $V_{\\mathrm{test}}$ divided by the predicted variance of a random 5-of-23 partition mean averaged over six seeds (Eq.~\\ref{eq:partvar}); ICC is $\\sigma^2_{\\mathrm{scene}}/(\\sigma^2_{\\mathrm{scene}}+\\sigma^2_{\\mathrm{inter}}+\\sigma^2_{\\mathrm{seed}})$. Brackets: 95\\% parametric-bootstrap intervals of the moment estimator on the actual design, conditional on the 23 scenes (Sec.~\\ref{sec:estimation}). For PSNR the last two columns compare with the partition variance observed in the earlier single-partition grid, whose score is the frame-pooled run-level PSNR averaged over six seeds and not the unit-equal scene-mean PSNR modelled here (Sec.~\\ref{sec:partvar}): an approximate check across the two aggregations, not a same-statistic validation of Eq.~\\eqref{eq:partvar} \\citep{woo2026partition}.}\\label{tab:decomp}',
      '\\footnotesize\\resizebox{\\textwidth}{!}{\\begin{tabular}{llrrrrrrrr}\\toprule', 'Model & Metric & scene & train & inter & seed & Test share & ICC & share vs.\\ obs. & $V_{\\mathrm{pred}}/V_{\\mathrm{obs}}$ \\\\\\midrule']
 for a, A in m2['archs'].items():
     first = True
@@ -82,11 +88,12 @@ for a, A in fl['archs'].items():
         first = False
     L.append(f"\\multicolumn{{8}}{{l}}{{\\quad zero-shot EPE {fl['zeroshot'][a]['epe_pair_mean']:.3f}; fine-tuned scene-mean EPE {A['FH4_zeroshot_vs_finetuned_scene_difficulty']['epe_finetuned_scene_mean']:.2f} vs.\\ zero-shot {A['FH4_zeroshot_vs_finetuned_scene_difficulty']['epe_zeroshot_mean']:.2f}; rank correlation {A['FH4_zeroshot_vs_finetuned_scene_difficulty']['spearman']:.3f}}} \\\\\\addlinespace")
 L += ['\\bottomrule\\end{tabular}}\\end{table*}']
-(T / 'tab_decomp_flow.tex').write_text('\n'.join(L) + '\n')
+(T / 'tab_decomp_flow.tex').write_text(_supp('\n'.join(L)) + '\n')   # length cut 2026-11-10: in the supplement
 
 # ---- T4 resolution: absolute MDE ladders (si-MSE, PSNR for intrinsic; EPE for flow) + pair cells
-L = ['\\begin{table*}[!t]\\centering\\caption{Resolution. Top: minimum detectable effect (two-sided $\\alpha=0.05$, power $0.8$) of a difference between two independently evaluated absolute scores, each under $K$ partitions with three seeds, or each under the full-coverage five-fold design (all 23 scenes scored, three seeds); the factor of two of Eq.~\\eqref{eq:seabs} is included, and the standard error of one score alone is the MDE divided by $z\\sqrt2\\approx3.96$. Full-coverage scores target the mixture of 18- and 19-scene training sets (Sec.~\\ref{sec:designs}; for one si-MSE pair the mixture and fixed-18-scene targets differ measurably, Sec.~\\ref{sec:results3}). Bottom: paired comparisons (the six intrinsic architecture pairs under si-MSE, LMSE, and PSNR, and the flow pair under EPE), with the actual mean gap, the share of the paired variance due to the scene$\\times$method interaction under the prevailing recipe, and the gap divided by the MDE. The ratio is a plug-in power assessment: a value $\\ge 1$ means that a true gap of the observed size would be detected with power $\\ge0.8$ under that design; it is not a verdict on the observed gap, whose own uncertainty Sec.~\\ref{sec:results2} reports.}\\label{tab:resolution}',
-     '\\footnotesize\\resizebox{\\textwidth}{!}{\\begin{tabular}{llrrrrrr}\\toprule', '\\multicolumn{8}{l}{\\textit{Absolute scores}}\\\\', 'Model & Metric & $K{=}1$ & $K{=}3$ & $K{=}5$ & $K{=}10$ & $K{=}23$ & full cov.\\ \\\\\\midrule']
+# length cut 2026-11-10: the absolute-score ladder is Supplementary Table S-resolution_abs; the main text keeps the paired comparisons.
+L = ['\\begin{table*}[!htb]\\centering\\caption{Minimum detectable effect (two-sided $\\alpha=0.05$, power $0.8$) of a difference between two independently evaluated absolute scores, each under $K$ partitions with three seeds, or each under the full-coverage five-fold design (all 23 scenes scored, three seeds); the factor of two of Eq.~\\eqref{M-eq:seabs} is included, and the standard error of one score alone is the MDE divided by $z\\sqrt2\\approx3.96$. Full-coverage scores target the mixture of 18- and 19-scene training sets (Sec.~\\ref{M-sec:designs}).}\\label{tab:resolution_abs}',
+     '\\footnotesize\\begin{tabular}{llrrrrrr}\\toprule', 'Model & Metric & $K{=}1$ & $K{=}3$ & $K{=}5$ & $K{=}10$ & $K{=}23$ & full cov.\\ \\\\\\midrule']
 for a, A in m2['archs'].items():
     for y in ['simse_R_gray_mean', 'R_PSNR_of_mean_mse']:
         lad = A['metrics'][y]['MDE_absolute']
@@ -94,7 +101,10 @@ for a, A in m2['archs'].items():
 for a, A in fl['archs'].items():
     lad = A['metrics']['epe_mean']['MDE_absolute']
     L.append(f"{AN[a]} & EPE & " + ' & '.join(g(lad[k]) for k in ['K1_S3', 'K3_S3', 'K5_S3', 'K10_S3', 'K23_S3', 'fullcov_5fold_S3']) + ' \\\\')
-L += ['\\midrule', '\\multicolumn{8}{l}{\\textit{Paired comparisons}}\\\\', 'Pair & Metric & gap & inter.\\ share & MDE $K{=}1$ & MDE full cov.\\ & gap/MDE$_{K=1}$ & gap/MDE$_{\\mathrm{full}}$ \\\\\\midrule']
+L += ['\\bottomrule\\end{tabular}\\end{table*}']
+(T / 'tab_resolution_abs.tex').write_text('\n'.join(L) + '\n')
+L = ['\\begin{table*}[!t]\\centering\\caption{Resolution of the paired comparisons: the six intrinsic architecture pairs under si-MSE, LMSE, and PSNR, and the flow pair under EPE, with the actual mean gap, the share of the paired variance due to the scene$\\times$method interaction under the prevailing recipe, the paired MDE (two-sided $\\alpha=0.05$, power $0.8$) under one partition with three seeds and under the full-coverage five-fold design, and the gap divided by the MDE. The ratio is a plug-in power assessment: a value $\\ge 1$ means that a true gap of the observed size would be detected with power $\\ge0.8$ under that design; it is not a verdict on the observed gap, whose own uncertainty Sec.~\\ref{sec:results2} reports. Full-coverage scores target the mixture of 18- and 19-scene training sets (Sec.~\\ref{sec:designs}; for one si-MSE pair the mixture and fixed-18-scene targets differ measurably, Sec.~\\ref{sec:results3}); the absolute-score MDE ladder is Supplementary Table~\\ref{S-tab:resolution_abs}.}\\label{tab:resolution}',
+     '\\footnotesize\\resizebox{\\textwidth}{!}{\\begin{tabular}{llrrrrrr}\\toprule', 'Pair & Metric & gap & inter.\\ share & MDE $K{=}1$ & MDE full cov.\\ & gap/MDE$_{K=1}$ & gap/MDE$_{\\mathrm{full}}$ \\\\\\midrule']
 for p in sorted(m2['pairs'], key=lambda p: ({'simse_R_gray_mean': 0, 'lmse_R_chen_mean': 1, 'R_PSNR_of_mean_mse': 2}.get(p['metric'], 9), p['pair'])):
     if p['metric'] not in ('simse_R_gray_mean', 'lmse_R_chen_mean', 'R_PSNR_of_mean_mse'): continue     # series-2 round 1 (B4): LMSE rows added (the decisive comparison)
     L.append(f"{AN[p['b']]}$-${AN[p['a']]} & {MN[p['metric']]} & {p['mean_gap']:+.3g} & {p['share_interaction_K1S3']:.2f} & {g(p['MDE_paired']['paired_K1_S3'])} & {g(p['MDE_paired']['paired_fullcov_5fold_S3'])} & {p['gap_over_MDE_K1']:.2f} & {p['gap_over_MDE_fullcov']:.2f} \\\\")
@@ -125,7 +135,7 @@ for a in ['direct', 'unet']:
         o = A.get('H6_observed', {}).get(y)
         L.append(f"{AN[a]} / {MN[y]} & {A['metrics'][y]['H6_sim_variance_reduction']:+.2f} & " + (f"{o['reduction']:+.2f} & {o['n_rand_reps']}/{o['n_strat_reps']}" if o else '-- & --') + ' \\\\')
 L += ['\\bottomrule\\end{tabular}\\end{table}']
-(T / 'tab_controls.tex').write_text('\n'.join(L) + '\n')
+(T / 'tab_controls.tex').write_text(_supp('\n'.join(L)) + '\n')   # length cut 2026-11-10: in the supplement
 
 # ---- T6 design cost: runs per method -> MDE (absolute and paired) for the headline quantities
 mD = m2['archs']['direct']['metrics']; mS = fl['archs']['raft_small']['metrics']
@@ -152,18 +162,18 @@ L += ['\\bottomrule\\end{tabular}}\\end{table*}']
 (T / 'tab_designcost.tex').write_text('\n'.join(L) + '\n')
 
 # ---- T7 metric definitions (static: parameters read from experiment_cv2.py / experiment_flow.py, no result numbers)
-L = ['\\begin{table*}[!t]\\centering\\caption{Scores used in the paper: definition, colour handling, and scene-level aggregation. $x_f,\\hat x_f$: ground-truth and predicted reflectance of frame $f$ ($256\\times256$); ``gray\'\' is the channel mean; gains $\\alpha$ are least-squares optimal (Sec.~\\ref{sec:gauge}). Flow scores are computed at full resolution over the evaluated pixels (the dataset\'s valid pixels with ground-truth magnitude below 400\\,px).}\\label{tab:metrics}',
+L = ['\\begin{table*}[!t]\\centering\\caption{Scores used in the paper: definition, colour handling, and scene-level aggregation. $x_f,\\hat x_f$: ground-truth and predicted reflectance of frame $f$ ($256\\times256$); ``gray\'\' is the channel mean; gains $\\alpha$ are least-squares optimal (Sec.~\\ref{sec:gauge}). Flow scores are computed at full resolution over the evaluated pixels (the dataset\'s valid pixels with ground-truth magnitude below 400\\,px). Boundary conventions: LMSE windows are placed without padding from the top-left corner (' + _LMSE_BOUNDARY + '); SSIM uses valid convolution without padding, so the $' + _SSIM_MAP + '$ map of window scores is averaged.}\\label{tab:metrics}',
      '\\footnotesize\\resizebox{\\textwidth}{!}{\\begin{tabular}{llp{5.2cm}p{4.6cm}}\\toprule', 'Score & Colour & Definition (per frame or pair) & Scene-level score \\\\\\midrule',
-     'MSE, PSNR & RGB & $\\mathrm{MSE}_f=\\|x_f-\\hat x_f\\|^2/N$; no gain (absolute gauge) & PSNR of the scene-mean MSE, Eq.~\\eqref{eq:psnr} (the earlier grid\'s convention) \\\\',
+     'MSE, PSNR & RGB & $\\mathrm{MSE}_f=\\|x_f-\\hat x_f\\|^2/N$; no gain (absolute gauge) & PSNR of the scene-mean MSE, Sec.~\\ref{sec:gauge} (the earlier grid\'s convention) \\\\',
      'si-MSE & gray & scalar gain per frame, Eq.~\\eqref{eq:simse} \\citep{grosse2009ground}; invariant to a global scale of $\\hat x_f$ & mean over frames \\\\',
-     'LMSE & gray & per-window gain, windows of side $\\mathrm{round}(0.1\\min(h,w))=26$ at stride 13, Eq.~\\eqref{eq:lmse} \\citep{chen2013simple}; one gain fitted inside each window (overlapping windows: not an invariance to an arbitrary spatially varying gain); windows placed without padding from the top-left corner (' + _LMSE_BOUNDARY + ') & mean over frames \\\\',
-     'DSSIM & gray & $(1-\\mathrm{SSIM})/2$ on the unaligned prediction, Gaussian window $11\\times11$, $\\sigma=1.5$, $k_1=0.01$, $k_2=0.03$ \\citep{wang2004ssim}; no gain: the structure term of SSIM is scale invariant up to its stabilising constant, the luminance and contrast terms are not; valid convolution without padding, the $' + _SSIM_MAP + '$ map of window scores averaged & mean over frames \\\\',
+     'LMSE & gray & per-window gain, windows of side $\\mathrm{round}(0.1\\min(h,w))=26$ at stride 13, Eq.~\\eqref{eq:lmse} \\citep{chen2013simple}; one gain inside each window (overlapping windows: not an invariance to an arbitrary spatially varying gain); unpadded, see caption & mean over frames \\\\',
+     'DSSIM & gray & $(1-\\mathrm{SSIM})/2$ on the unaligned prediction, Gaussian window $11\\times11$, $\\sigma=1.5$, $k_1=0.01$, $k_2=0.03$ \\citep{wang2004ssim}; no gain: only the structure term of SSIM is scale invariant, and only up to its stabilising constant; valid convolution, see caption & mean over frames \\\\',
      'PSNR, scene gain & RGB & one scalar gain pooled over the scene, Eq.~\\eqref{eq:poolgain}; used for the gauge hypothesis & $-10\\log_{10}\\mathrm{MSE}^{(\\alpha)}_u$ \\\\\\addlinespace',
      'EPE & -- & mean end-point error over the evaluated pixels (dataset-valid and ground-truth magnitude $<400$\\,px; Sec.~\\ref{sec:programme}) & mean over the scene\'s pairs (pair-weighted) or over its evaluated pixels (pixel-weighted) \\\\',
      'Fl-all, $>$3\\,px rate & -- & fraction of valid pixels with EPE $>3$\\,px and $>5\\%$ of the flow magnitude (Fl-all) or with EPE $>3$\\,px & mean over pairs \\\\',
      'EPE occ.\\ / non-occ.\\ & -- & EPE restricted to occluded / non-occluded valid pixels & mean over pairs \\\\',
      '\\bottomrule\\end{tabular}}\\end{table*}']
-(T / 'tab_metrics.tex').write_text('\n'.join(L) + '\n')
+(T / 'tab_metrics.tex').write_text(_supp('\n'.join(L)) + '\n')   # length cut 2026-11-10: in the supplement
 
 # ---- T8 appendix: REML vs method-of-moments components for every unit-level fit, with the consistency ratio
 L = ['\\begin{table*}[!p]\\centering\\caption{Method-of-moments (reported, Sec.~\\ref{sec:estimation}) and multi-start REML (cross-check) estimates of the four variance components for every unit-level fit (killing experiment, main experiment, flow arm). ``Ratio\'\' is the variance of unit means implied by the REML components through the exact design coefficients of \\eqref{eq:momq} divided by the observed one; ``band\'\' marks whether it lies in $[0.80,1.25]$. The moment columns carry the run-level seed correction of Sec.~\\ref{sec:estimation} ($-v_\\zeta/S$ on the train-side component and $-v_e/S$ on the interaction, relative to the cell-level solution of \\eqref{eq:momq}); REML has no run-level term and partitions $v_\\zeta$ between its training-set and residual components. Rows marked $\\dagger$ are the fits at which a single-start REML had stopped at a spurious optimum in the first analysis; all REML columns use the multi-start fit.}\\label{tab:remlmom}',
@@ -215,6 +225,6 @@ if FEJ.exists() and FJJ.exists():
                  f"{g(x['joint_adjusted']['s2_inter'])}, {100*x['inter_reduction_joint']:.0f}\\% [{100*b['reduction']['ci95'][0]:.0f}, {100*b['reduction']['ci95'][1]:.0f}] & {x['joint_adjusted']['test_share']:.2f} [{b['share_adj']['ci95'][0]:.2f}, {b['share_adj']['ci95'][1]:.2f}] & "
                  f"{g(dc['s2_inter']['median'])} [{g(dc['s2_inter']['p5'])}, {g(dc['s2_inter']['p95'])}] & {dc['test_share']['median']:.2f} & {s['ratio_empirical_over_primary']['one']:.2f} & {s['ratio_empirical_over_primary']['full']:.2f} \\\\")
     L += ['\\bottomrule\\end{tabular}}\\end{table*}']
-    (T / 'tab_family.tex').write_text('\n'.join(L) + '\n')
+    (T / 'tab_family.tex').write_text(_supp('\n'.join(L)) + '\n')   # length cut 2026-11-10: in the supplement
 
 print('tables written:', sorted(p.name for p in T.glob('*.tex')), f'| GPU-h kill {gpu_kill:.1f} main {gpu_main:.1f} flow {gpu_flow:.1f}')

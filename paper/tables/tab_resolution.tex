@@ -1,19 +1,5 @@
-\begin{table*}[!t]\centering\caption{Resolution. Top: minimum detectable effect (two-sided $\alpha=0.05$, power $0.8$) of a difference between two independently evaluated absolute scores, each under $K$ partitions with three seeds, or each under the full-coverage five-fold design (all 23 scenes scored, three seeds); the factor of two of Eq.~\eqref{eq:seabs} is included, and the standard error of one score alone is the MDE divided by $z\sqrt2\approx3.96$. Full-coverage scores target the mixture of 18- and 19-scene training sets (Sec.~\ref{sec:designs}; for one si-MSE pair the mixture and fixed-18-scene targets differ measurably, Sec.~\ref{sec:results3}). Bottom: paired comparisons (the six intrinsic architecture pairs under si-MSE, LMSE, and PSNR, and the flow pair under EPE), with the actual mean gap, the share of the paired variance due to the scene$\times$method interaction under the prevailing recipe, and the gap divided by the MDE. The ratio is a plug-in power assessment: a value $\ge 1$ means that a true gap of the observed size would be detected with power $\ge0.8$ under that design; it is not a verdict on the observed gap, whose own uncertainty Sec.~\ref{sec:results2} reports.}\label{tab:resolution}
+\begin{table*}[!t]\centering\caption{Resolution of the paired comparisons: the six intrinsic architecture pairs under si-MSE, LMSE, and PSNR, and the flow pair under EPE, with the actual mean gap, the share of the paired variance due to the scene$\times$method interaction under the prevailing recipe, the paired MDE (two-sided $\alpha=0.05$, power $0.8$) under one partition with three seeds and under the full-coverage five-fold design, and the gap divided by the MDE. The ratio is a plug-in power assessment: a value $\ge 1$ means that a true gap of the observed size would be detected with power $\ge0.8$ under that design; it is not a verdict on the observed gap, whose own uncertainty Sec.~\ref{sec:results2} reports. Full-coverage scores target the mixture of 18- and 19-scene training sets (Sec.~\ref{sec:designs}; for one si-MSE pair the mixture and fixed-18-scene targets differ measurably, Sec.~\ref{sec:results3}); the absolute-score MDE ladder is Supplementary Table~\ref{S-tab:resolution_abs}.}\label{tab:resolution}
 \footnotesize\resizebox{\textwidth}{!}{\begin{tabular}{llrrrrrr}\toprule
-\multicolumn{8}{l}{\textit{Absolute scores}}\\
-Model & Metric & $K{=}1$ & $K{=}3$ & $K{=}5$ & $K{=}10$ & $K{=}23$ & full cov.\ \\\midrule
-DirectCNN & si-MSE & 0.0178 & 0.0103 & 0.00797 & 0.00563 & 0.00371 & 0.00234 \\
-DirectCNN & PSNR & 4.08 & 2.36 & 1.83 & 1.29 & 0.852 & 1.43 \\
-Proposed & si-MSE & 0.0175 & 0.0101 & 0.00783 & 0.00554 & 0.00365 & 0.00262 \\
-Proposed & PSNR & 3.73 & 2.15 & 1.67 & 1.18 & 0.778 & 1.48 \\
-TransUNet & si-MSE & 0.0157 & 0.00906 & 0.00702 & 0.00496 & 0.00327 & 0.00281 \\
-TransUNet & PSNR & 3.41 & 1.97 & 1.53 & 1.08 & 0.712 & 1.33 \\
-UNet & si-MSE & 0.0166 & 0.0096 & 0.00744 & 0.00526 & 0.00347 & 0.00233 \\
-UNet & PSNR & 3.65 & 2.1 & 1.63 & 1.15 & 0.76 & 1.47 \\
-RAFT-large & EPE & 2.74 & 1.58 & 1.23 & 0.868 & 0.572 & 0.135 \\
-RAFT-small & EPE & 5.1 & 2.94 & 2.28 & 1.61 & 1.06 & 0.317 \\
-\midrule
-\multicolumn{8}{l}{\textit{Paired comparisons}}\\
 Pair & Metric & gap & inter.\ share & MDE $K{=}1$ & MDE full cov.\ & gap/MDE$_{K=1}$ & gap/MDE$_{\mathrm{full}}$ \\\midrule
 Proposed$-$DirectCNN & si-MSE & +0.000725 & 0.73 & 0.00719 & 0.00172 & 0.10 & 0.42 \\
 TransUNet$-$DirectCNN & si-MSE & -0.000156 & 0.65 & 0.00774 & 0.00213 & 0.02 & 0.07 \\

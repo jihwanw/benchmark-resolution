@@ -178,3 +178,35 @@ fig.savefig(OUT / 'fig9_flow_interaction.pdf', dpi=220); fig.savefig(OUT / 'fig9
 json.dump({'gauge_compositions': comps, 'inter_psnr': ps, 'flow_scene_epe': {'raft_small': sm, 'raft_large': lg}, 'zoom_windows': STATS},
           open(OUT / 'qual_fig_stats.json', 'w'), indent=1)
 print('qualitative figures written'); print(json.dumps(STATS, indent=0)[:900])
+
+# ======================================================================================================================
+# Length cut (2026-11-10, IJCV 25-page limit): compact main-text versions. The full-page figures above move to the supplement.
+#   fig7_gauge_top        the two context rows of the gauge figure (input, GT, five predictions, |group mean difference|); crops -> supplement
+#   fig10_interaction_ctx the four context rows of the two interaction figures (intrinsic: ambush_5, sleeping_2; flow: ambush_4, sleeping_2)
+# Windows, statistics and criteria are unchanged (same STATS entries); the red boxes mark the crops shown in the supplement.
+fig, gs = grid([ctx_h, ctx_h], hspace_cm=0.75)
+for k, (t, im, cm) in enumerate(ctx):
+    r, c = divmod(k, 4); ax = fig.add_subplot(gs[r, c * 3:(c + 1) * 3])
+    show(ax, im, t, cmap=cm, vmin=0 if cm else None, vmax=diff_map.max() if cm else None, fs=6.0); box(ax, i7, j7, PH, PW)
+fig.savefig(OUT / 'fig7_gauge_top.pdf', dpi=220); fig.savefig(OUT / 'fig7_gauge_top.png', dpi=160); plt.close(fig)
+
+fig, gs = grid([ctx_h, ctx_h, ctx_h, ctx_h], hspace_cm=0.75, left_cm=0.95)   # room for two-line rotated row labels
+for r, s in enumerate(inter['scenes_shown']):
+    ft = frame_key(f'inter/direct/{s}/'); i8, j8 = STATS['fig8'][s]['window_rc']
+    inp = chw(qi[f'inter/direct/{s}/{ft}/input']); gt = chw(qi[f'inter/direct/{s}/{ft}/gt_R'])
+    pd_, pu = chw(qi[f'inter/direct/{s}/{ft}/pred_R']), chw(qi[f'inter/unet/{s}/{ft}/pred_R'])
+    row = [('input\n ', inp), ('ground-truth albedo\n ', gt), (f"DirectCNN\n{ps[f'direct/{s}']:.1f} dB", pd_), (f"UNet\n{ps[f'unet/{s}']:.1f} dB", pu)]
+    for c, (t, im) in enumerate(row):
+        ax = fig.add_subplot(gs[r, c * 3:(c + 1) * 3]); show(ax, im, t, fs=6.2); box(ax, i8, j8, PH, PW)
+        if c == 0: ax.text(-0.03, 0.5, s.replace('_', ' ') + '\nintrinsic', transform=ax.transAxes, rotation=90, va='center', ha='right', fontsize=6.8)
+for r, s in enumerate(mf['scenes_shown']):
+    pair = STATS['fig9'][s]['pair']; i9, j9 = STATS['fig9'][s]['window_rc']
+    bs, bl = f'finetuned/raft_small/{pair}/', f'finetuned/raft_large/{pair}/'
+    img = np.transpose(qf[bs + 'img1'], (1, 2, 0)); gt = qf[bs + 'gt']
+    mm = max(np.percentile(np.linalg.norm(gt, axis=0), 99), 1e-6)
+    row = [('frame\n ', img), ('ground-truth flow\n ', flow_rgb(gt, mm)), (f'RAFT-small\nscene EPE {sm[s]:.2f} px', flow_rgb(qf[bs + 'pred'], mm)), (f'RAFT-large\nscene EPE {lg[s]:.2f} px', flow_rgb(qf[bl + 'pred'], mm))]
+    for c, (t, im) in enumerate(row):
+        ax = fig.add_subplot(gs[2 + r, c * 3:(c + 1) * 3]); show(ax, im, t, aspect='equal', fs=6.2, interp='antialiased'); box(ax, i9, j9, ZP, ZP)
+        if c == 0: ax.text(-0.03, 0.5, s.replace('_', ' ') + '\nflow', transform=ax.transAxes, rotation=90, va='center', ha='right', fontsize=6.8)
+fig.savefig(OUT / 'fig10_interaction_ctx.pdf', dpi=220); fig.savefig(OUT / 'fig10_interaction_ctx.png', dpi=160); plt.close(fig)
+print('compact figures written: fig7_gauge_top, fig10_interaction_ctx')
